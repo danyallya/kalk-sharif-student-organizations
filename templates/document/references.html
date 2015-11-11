@@ -1,0 +1,29 @@
+{% extends 'no_base.html' %}
+{% load account_template_tags %}
+{% block JS %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="content tab-content current" id="reference-div" style="height: 522px;">
+        {% for ex in references %}
+            <a class="related-ex-row" style="margin-bottom: 31px;display: table; position: relative;"
+               href="{% url 'experience_page' ex.id %}" target="_blank">
+                <div style="width: 30%; position: relative;float: right;">
+                    <img class="university_arm" src="/media/{{ ex.university.image }}" style="width: 100%">
+                </div>
+                <div style="width: 68%; position: relative;float: right;">
+                    {{ ex.title }}
+                </div>
+                <br/>
+
+                <div style="width: 68%; position: relative;float: right;">
+                    {{ ex.date|pdate_if_date }}
+                </div>
+            </a>
+        {% empty %}
+            موردی موجود نیست.
+        {% endfor %}
+    </div>
+
+{% endblock %}

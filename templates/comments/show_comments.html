@@ -1,0 +1,20 @@
+{% extends 'no_base.html' %}
+
+{% block JS %}
+    <script>
+        var sendCommentUrl = '{% url 'send_comment' content_type_id %}';
+        var objId = {{ obj_id }};
+        var showCommentUrl = '{% url 'show_comments' content_type_id %}';
+        var countCommentUrl = '{% url 'comments_count' content_type_id %}';
+    </script>
+
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div id="comment-panel">
+        <div class="content" id="comments-div">
+            {% include 'comments/all_comments.html' with content_type_id=content_type_id obj_id=obj_id extra_class="popup-extra-form" %}
+        </div>
+    </div>
+{% endblock %}

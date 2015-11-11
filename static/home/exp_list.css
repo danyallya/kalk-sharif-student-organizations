@@ -1,0 +1,282 @@
+/*exp-header*/
+.exp-header {
+    width: 100%;
+    height: 70px;
+    background-color: #efefef;
+    padding: 9px;
+    margin-bottom: 33px;
+
+}
+
+.header-item {
+    width: 186px;
+    margin-top: 4px;
+    height: 44px;
+    border: 1px solid black;
+    background-color: white;
+    margin-left: 10px;
+    cursor: pointer;
+    font-family: "Entezar", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 30px;
+    z-index: 222;
+
+}
+
+#tag-res {
+    top: 40px;
+    right: 403px;
+    width: 186px;
+    border: 1px solid black;
+    background-color: white;
+    min-height: 4px;
+    z-index: 30;
+    display: none;
+    padding: 0;
+    padding-right: 5px;
+}
+
+#tag-res li {
+    font-family: "Entezar", sans-serif;
+    list-style: none;
+    cursor: pointer;
+}
+
+#tag-res li:hover {
+    color: gray;
+}
+
+input.header-item {
+    padding-right: 5px;
+}
+
+input.header-item::-webkit-input-placeholder {
+    color: black;
+}
+
+input.header-item:-moz-placeholder {
+    /* Firefox 18- */
+    color: black;
+}
+
+input.header-item::-moz-placeholder {
+    /* Firefox 19+ */
+    color: black;
+}
+
+input.header-item:-ms-input-placeholder {
+    color: black;
+}
+
+.header-item-left {
+    width: 186px;
+    height: 44px;
+    margin-top: 4px;
+    border: 1px solid black;
+    background-color: #624f87;
+    text-align: center;
+    padding-top: 2px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-item option {
+    font-family: "Entezar", sans-serif;
+    font-weight: bold;
+    height: 35px;
+    /*margin-right: 20px;*/
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.exp-header option[disabled] {
+    display: none;
+}
+
+.choose-item {
+    width: 186px;
+    margin-bottom: 11px;
+    height: 44px;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+    font-family: "Entezar", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 30px;
+    margin-right: 2px;
+
+}
+
+.choose-item option {
+    font-family: "Entezar", sans-serif;
+    font-weight: bold;
+    height: 35px;
+    /*margin-right: 20px;*/
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.choose-uni {
+    background-color: white;
+    width: 192px;
+    border: 1px solid #959595;
+    z-index: 111;
+    padding-top: 60px;
+    display: none;
+
+}
+
+.choose-uni:hover {
+
+    display: block;
+
+}
+
+.uni {
+    margin-right: 2px;
+    margin-bottom: 11px;
+    color: black;
+    right: 9px;
+}
+
+.uni:hover + .choose-uni {
+    display: block;
+}
+
+.service {
+    margin-right: 198px;
+}
+
+/*main-item*/
+.main {
+    width: 100%;
+}
+
+.item {
+    width: 330px;
+    height: 305px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.main-item {
+    position: absolute;
+    padding: 11px;
+    overflow: hidden;
+    font-size: 13px;
+    width: 323px;
+    height: 239px;
+    margin-top: 8px;
+    border: 4px solid #ab1142;
+    background-color: #e6eef7;
+    text-align: right;
+    color: #ab1142;
+
+}
+
+.main-item div {
+    width: 150px;
+    text-align: justify;
+}
+
+.item:not(.add):hover .main-item-on {
+    right: 170px;
+}
+
+.main-item-on {
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    transition: all ease .5s;
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    overflow: hidden;
+    background-color: white;
+    border: 4px solid #ab1142;
+    right: 53px;
+    color: #ab1142;
+    z-index: 1;
+}
+
+.main-item-img {
+    background-image: url("/static/images/exp-add.png");
+    width: 88px;
+    height: 88px;
+    margin-right: 80px;
+    margin-top: 70px;
+    margin-bottom: 28px;
+    cursor: pointer;
+
+}
+
+.main-item-text {
+    font-size: 20px;
+    margin-right: 84px;
+    cursor: pointer;
+
+}
+
+.item-on-text {
+    background-color: #002A80;
+    width: 120px;
+    height: 292px;
+    position: relative;
+}
+
+.text-header {
+    position: absolute;
+    width: 86px;
+    margin-top: 9px;
+    font-size: 19px;
+    margin-right: 15px;
+}
+
+.item-time {
+    color: white;
+    position: absolute;
+    bottom: 51px;
+    right: 4px;
+
+}
+
+.item-time img {
+    margin-top: 5px;
+    margin-left: 11px;
+}
+
+.item-uni {
+    right: 4px;
+    color: white;
+    position: absolute;
+    top: 160px;
+}
+
+.item-uni img {
+    margin-top: 5px;
+    margin-left: 11px;
+}
+
+.item-on-text span {
+    width: 76px;
+    line-height: 17px;
+}
+
+.item-servis {
+    right: 4px;
+    color: white;
+    position: absolute;
+    top: 115px;
+    font-size: 14px;
+}
+
+.servis-text {
+    margin-top: 5px;
+    width: 80px;
+    margin-right: 2px;
+    line-height: 17px;
+}

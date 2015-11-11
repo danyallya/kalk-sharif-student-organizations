@@ -1,0 +1,102 @@
+#package-comments #comment-form-content {
+    width: 97%;
+    padding: 2%;
+}
+
+#package-comments .comment-form-submit {
+    width: 16.3%;
+    margin-left: -0.7%;
+}
+
+#package-comments .comment-form-text {
+    width: 100%;
+}
+
+#package-comments .comment-form .comment-form-name {
+    width: 40%;
+}
+
+#package-comments .comment-form .comment-form-uni {
+    width: 40%;
+    margin-top: 0;
+    margin-right: 1%;
+}
+
+#package-comments ul li .comment-text {
+    width: 90%;
+}
+
+.nav-icon {
+    width: 30px;
+    position: absolute;
+    top: 8px;
+    cursor: pointer;
+}
+
+#fullscreen {
+    right: 10px;
+}
+
+#zoomout {
+    right: 60px;
+}
+
+#zoomin {
+    right: 90px;
+}
+
+#search-icon {
+    left: 12px;
+}
+
+#pdf-search {
+    width: 100px;
+    left: 48px;
+    position: absolute;
+    top: 8px;
+    border: none;
+    border-radius: 0;
+    height: 18px;
+    padding: 5px;
+    color: white;
+    background: rgb(96, 114, 145);
+}
+
+#pdf-search::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: white;
+}
+
+#pdf-search:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: white;
+    opacity: 1;
+}
+
+#pdf-search::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: white;
+    opacity: 1;
+}
+
+#pdf-search:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: white;
+}
+
+#package-content {
+    height: 512px;
+    margin-top: 10px;
+    line-height: 24px;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    background: #848484;
+    padding: 0;
+}
+
+#fullscreen-content {
+    overflow: auto;
+    text-align: center;
+    background: #848484;
+}

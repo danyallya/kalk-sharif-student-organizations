@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block  content %}
+
+    {% if edit_form %}
+        {% include 'form.html' with form=edit_form title="ویرایش حساب کاربری" %}
+    {% endif %}
+
+    {% if organize_form %}
+        {% include 'form.html' with form=organize_form title="ویرایش اطلاعات تشکل" %}
+    {% endif %}
+
+{% endblock %}

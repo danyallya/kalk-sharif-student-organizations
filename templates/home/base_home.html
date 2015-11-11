@@ -1,0 +1,282 @@
+{% load account_template_tags %}
+{% load date_template_tags %}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}کالک | {% get_current_menu_name menus %}{% endblock %}</title>
+    <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+    {#    <link rel="shortcut icon" href="/static/favicon.ico">#}
+
+    {% block CSS %}
+        <link rel="stylesheet" type="text/css" href="/static/home/base_home.css?v=0.0.6"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/jquery-ui/jquery-ui.min.css"/>
+    {% endblock %}
+
+    {% block JS %}
+        <script type="text/javascript" src="/static/lib/jquery-1.10.2.min.js"></script>
+        <script>
+            var django = {jQuery: jQuery};
+            var help = {{ help|safe }};
+        </script>
+        <script type="text/javascript" src="/static/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/static/home/base.js?v=0.1.11"></script>
+    {% endblock %}
+
+</head>
+
+<body class="main-width mrg-center MjTunisia">
+<div class="top-menu BLotus">
+    <div class="right wlecome white">
+        به سامانه کالک خوش آمدید!
+    </div>
+
+    {% if user.is_authenticated %}
+        <a class="right top relative no-hover-link" href="{% url "account_page" %}">
+            <div class="massage-img right"></div>
+            <div class="massage-rate absolute">
+                {{ user|get_messages_count }}
+            </div>
+            <div class="top-text white right">
+                صندوق پیام
+            </div>
+        </a>
+
+        <a class="right top no-hover-link" href="{% url "add_experience" %}">
+            <div class="up-img right"></div>
+
+            <div class="top-text white right">
+                بارگزاری تجربه
+            </div>
+        </a>
+
+        {% if manage_exp %}
+            <a class="right top no-hover-link" href="{% url "experience_manager" %}">
+                <div class="exp-imgs right"></div>
+
+                <div class="top-text white right">
+                    صندوق تجربیات
+                </div>
+            </a>
+        {% endif %}
+
+        {% if manage_upgrade_perm %}
+            <a class="right top relative no-hover-link" href="{% url "upgrade_request_manager" %}">
+                <div class="manager-img right"></div>
+                <div class="manager-rate absolute">
+                    {{ user|upgrade_manager_count }}
+                </div>
+                <div class="top-text white right">
+                    مدیریت اعضاء تشکل
+                </div>
+            </a>
+        {% endif %}
+
+        {% if upgrade_perm %}
+            <a class="right top no-hover-link" href="{% url "upgrade" %}">
+                <div class="upgrade-img right"></div>
+
+                <div class="top-text white right">
+                    درخواست ارتقاء
+                </div>
+            </a>
+        {% endif %}
+    {% else %}
+        <a class="right top no-hover-link" href="{% url "login" %}?next={{ request.path }}">
+            <div class="login-img right"></div>
+
+            <div class="top-text white right">
+                ورود
+            </div>
+
+        </a>
+
+        <div class="absolute login-box none">
+            <div class=" login-head">
+                ورود به کالک
+            </div>
+            <hr>
+            <input type="text" name="usarname" id="" class="" placeholder="نام کاربری:">
+            <input type="text" name="usarname" id="" class="" placeholder=" کلمه عبور:">
+            <input type="text" name="usarname" id="" class="" placeholder=" کد تصویر زیر:">
+
+            <img class="code-box right" src="">
+
+            <div class="right refresh"></div>
+            <div class="right login-btn">
+                ورود
+            </div>
+        </div>
+
+        <a class="right top no-hover-link" href="{% url "signup" %}?next={{ request.path }}">
+            <div class="sginup-img right"></div>
+
+            <div class="top-text white right">
+                ثبت نام در 3 ثانیه
+            </div>
+        </a>
+
+        <div class="absolute sginup-box none">
+            <div class=" login-head">
+                به کالک بپیوندید
+            </div>
+            <hr>
+            <input type="text" name="usarname" id="" class="" placeholder="نام کاربری:">
+            <input type="text" name="usarname" id="" class="" placeholder="  ایمیل:">
+            <input type="text" name="usarname" id="" class="" placeholder="رمز عبور:">
+
+
+            <div class="left sgin-btn">
+                ورود
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="user-panel">
+
+        <img src="/static/images/user-img.png" width="46" height="46" class="left">
+
+        <div class="left user-info">
+
+            <div class="user-item{% if level == 0 %} active{% endif %}">
+                مهمان
+            </div>
+            <div class="user-item{% if level == 1 %} active{% endif %}">
+                کاربر عادی
+            </div>
+            <div class="user-item{% if level == 2 %} active{% endif %}">
+                کاربر فعال
+            </div>
+            <div class="user-item{% if level == 3 %} active{% endif %}">
+                مسئول تشکل
+            </div>
+
+        </div>
+
+        <div class="left user-name">
+            {% if user.is_authenticated %}
+                {{ user }}
+            {% else %}
+                کاربر مهمان
+            {% endif %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <div class="panel-user-action">
+                <img src="{{ user.image|default:"/static/images/user-img.png" }}">
+
+                <a href="{% url "account_page" %}">
+                    تنظیمات حساب
+                </a>
+
+                <a href="{% url "logout" %}">
+                    خروج
+                </a>
+
+            </div>
+        {% endif %}
+
+    </div>
+
+    <form method="get" action="{% url "search" %}">
+        <input class="left search BLotus enter-search" placeholder="جستجو" name="q">
+    </form>
+
+
+</div>
+
+
+
+{% block menu %}
+    <div id="left-menu" class="right mrg-center entezar">
+
+
+        <div class="left-menu-header bg-green MjTunisia">
+
+            <a href="/">
+                <div class="menu-header-image mrg-center"></div>
+                <div class="menu-header-text white center">
+                    سامانه مدیریت تجربیات بسیچ
+                </div>
+            </a>
+
+        </div>
+
+        <div class="left-menu-item bg-grey">
+            <a href="{% url 'documents_list' %}">
+                <div class="menu-action-image mrg-center"></div>
+                <div class="menu-item-text  center">
+                    کالک عملیاتی
+                </div>
+            </a>
+        </div>
+
+        <div class="left-menu-item bg-grey">
+
+            <a href="{% url 'experiences_list' %}">
+                <div class="menu-exp-image mrg-center"></div>
+                <div class="menu-item-text  center">
+                    کالک تجربیات
+                </div>
+            </a>
+
+        </div>
+
+        <div class="left-menu-item bg-grey">
+
+            <a href="{% url "package_list" %}">
+                <div class="menu-backup-image mrg-center"></div>
+                <div class="menu-item-text  center">
+                    کالک پشتیبان
+                </div>
+            </a>
+
+        </div>
+
+        <div class="left-menu-item bg-grey">
+            <div class="menu-tv-image mrg-center"></div>
+            <div class="menu-item-text  center">
+                کالک tv
+            </div>
+        </div>
+
+        <div class="left-menu-item bg-grey">
+            <div class="menu-school-image mrg-center"></div>
+            <div class="menu-item-text  center">
+                مدرسه کالک
+            </div>
+        </div>
+
+        <div class="left-menu-item bg-grey">
+            <div class="menu-clu-image mrg-center"></div>
+            <div class="menu-item-text  center">
+                تقویم کالک
+            </div>
+        </div>
+
+        <div class="left-menu-item bg-grey">
+            <div class="menu-gift-image mrg-center"></div>
+            <div class="menu-item-text  center">
+                کالک مسئولیت
+            </div>
+        </div>
+
+        {#        <div class="left-menu-item bg-grey extra-item">#}
+        {#        </div>#}
+    </div>
+
+{% endblock %}
+
+<div id="main_container" class="right">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+{% include 'messages_alertify.html' %}
+
+
+</body>
+
+</html>

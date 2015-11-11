@@ -1,0 +1,14 @@
+django
+django-easy-select2
+xlsxwriter
+simplejson
+django_select2<5
+django-tinymce
+django-colorful
+django-simple-captcha
+wand
+PyPDF2
+pdfminer3k
+easy_thumbnails
+django-image-cropping
+psycopg2

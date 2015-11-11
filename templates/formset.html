@@ -1,0 +1,127 @@
+{% load account_template_tags %}
+<fieldset class="formset_fieldset">
+    <legend>{{ legend }}{% if required %}<span class="required_field">*</span>{% endif %}</legend>
+    <div id="{{ formset.prefix }}_formset">
+        <input type="hidden" name="formset_prefix" value="{{ formset.prefix }}">
+
+        <div class="formset_container">
+
+            <table id="{{ formset.prefix }}_table">
+                <thead>
+                <tr>
+                    {% for field in formset.forms.0 %}
+                        {% if field.name != 'DELETE' %}
+                            <td class="label_td"{% if field.field.widget.is_hidden %}
+                                style="display: none"{% endif %}>
+                                <span>{{ field.label }}    </span>
+                                {#                                {% if field.field.required %}#}
+                                {#                                    <span class="required_field">*#}
+                                {#                                        </span>#}
+                                {#                                {% endif %}#}
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </thead>
+                {% for form in formset.forms %}
+                    <tr>
+                        {% for field in form %}
+                            {% if field.field.widget.input_type == 'hidden' %}
+                                <td class="input_td{% if field.errors %} error_td{% endif %}">
+                                    {{ field }}
+                                </td>
+                            {% else %}
+                                <td class="input_td{% if field.errors %} error_td{% endif %}">
+                                    {% if field.name != 'DELETE' %}
+                                        {% if formset.readonly and field.field.widget.input_type == 'text' %}
+                                            <p>{{ field.value|pdate_if_date }}</p>
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
+                                    {% else %}
+                                        <input type="hidden" name="{{ field.html_name }}" id="{{ field.auto_id }}">
+                                    {% endif %}
+                                    {% if field.errors %}
+                                        <br/>{{ field.errors }}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                        {#                            <td class="delete_formset_td"></td>#}
+                    </tr>
+
+                {% endfor %}
+            </table>
+            {{ formset.management_form }}
+            {% if not formset.readonly %}
+                <script type="text/javascript">
+                    $(function () {
+                        var $formset_tr = $('#' + '{{ formset.prefix }}' + '_table tbody tr');
+                        $formset_tr.formset({
+                            prefix: '{{ formset.prefix }}',
+                            formCssClass: 'dynamic-formset-{{ formset.prefix }}',
+                            addText: 'افزودن',
+                            deleteText: '',
+                            added: function check_date_picker() {
+                                var $formset_tr = $('#' + '{{ formset.prefix }}' + '_table tbody tr');
+                                var $date_fields = $formset_tr.find('.hasDatepicker');
+                                $date_fields.removeClass('hasDatepicker');
+                                $date_fields.datepicker({
+                                    changeMonth: true,
+                                    changeYear: true,
+                                    yearRange: '-50:+50',
+                                    dateFormat: 'yy/mm/dd'
+                                });
+                                $formset_tr.find('input[type=text], select').attr('data-prompt-position', 'topLeft:-100');
+                                {% if formset.prefix != 'resume' %}
+                                    $formset_tr.each(function () {
+                                        var all_fields_name = [];
+                                        $(this).find('input[type=text], select').each(function () {
+                                            all_fields_name.push($(this).attr('id'));
+                                        });
+                                        $(this).find('input[type=text], select').each(function () {
+                                            if ($(this).attr('name').indexOf('end_year') == -1) {
+                                                var cls_attr = $(this).attr('class');
+                                                if (typeof cls_attr != 'undefined') {
+                                                    var new_cls_attr = cls_attr.substring(0, cls_attr.lastIndexOf(']')) + 'condRequired[' + all_fields_name + ']' + cls_attr.substring(cls_attr.lastIndexOf(']'));
+                                                    $(this).removeClass(cls_attr);
+                                                    $(this).addClass(new_cls_attr);
+                                                }
+                                            }
+                                        });
+                                    });
+                                {% endif %}
+
+                            }
+
+                        });
+
+                        $formset_tr.find('input[type=text], select').attr('data-prompt-position', 'topLeft:-100');
+
+                        $('.add-row').attr("title", "افزودن");
+
+                        {% if formset.prefix != 'resume' %}
+                            $formset_tr.each(function () {
+                                var all_fields_name = [];
+                                $(this).find('input[type=text], select').each(function () {
+                                    all_fields_name.push($(this).attr('id'));
+                                });
+                                $(this).find('input[type=text], select').each(function () {
+                                    if ($(this).attr('name').indexOf('end_year') == -1) {
+                                        var cls_attr = $(this).attr('class');
+                                        if (typeof cls_attr != 'undefined') {
+                                            var new_cls_attr = cls_attr.substring(0, cls_attr.lastIndexOf(']')) + 'condRequired[' + all_fields_name + ']' + cls_attr.substring(cls_attr.lastIndexOf(']'));
+                                            $(this).removeClass(cls_attr);
+                                            $(this).addClass(new_cls_attr);
+                                        }
+                                    }
+                                });
+                            });
+                        {% endif %}
+                    });
+                </script>
+            {% endif %}
+        </div>
+
+    </div>
+</fieldset>

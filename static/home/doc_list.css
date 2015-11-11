@@ -1,0 +1,416 @@
+/*services*/
+.services {
+    width: 990px;
+    height: 86px;
+}
+
+.card-container {
+    width: 74px;
+    height: 74px;
+    margin-right: 8px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: all 0.3s linear;
+    transform-style: preserve-3d;
+    transition: all 0.3s linear;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+}
+
+.card-container.active .card {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.face {
+    top: 0;
+    left: 0;
+    width: 74px;
+    height: 74px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.face.back {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    background-image: url("/static/images/services.png");
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-position: 0 74px;
+    color: white;
+    font-size: 16px;
+    /* background-color: #042767; */
+    padding-top: 13px;
+    padding-left: 4px;
+    padding-right: 5px;
+}
+
+.face.back.padded {
+    padding-top: 23px;
+    font-size: 18px;
+}
+
+.face.back span {
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.servic {
+    background-color: #ab1142;
+    border-radius: 50%;
+    width: 74px;
+    height: 74px;
+    overflow: hidden;
+    cursor: pointer;
+    background-image: url("/static/images/services.png");
+    background-position: 0 0;
+}
+
+#servic1 .front {
+    background-position: 74px 0;
+}
+
+#servic2 .front {
+    background-position: 160px 0;
+}
+
+#servic3 .front {
+    background-position: 245px 0;
+}
+
+#servic4 .front {
+    background-position: 329px 0;
+}
+
+#servic5 .front {
+    background-position: 412px 0;
+}
+
+#servic6 .front {
+    background-position: 493px 0;
+}
+
+#servic7 .front {
+    background-position: 576px 0;
+}
+
+#servic8 .front {
+    background-position: 659px 0;
+}
+
+#servic9 .front {
+    background-position: 742px 0;
+}
+
+#servic10 .front {
+    background-position: 825px 0;
+}
+
+#servic11 .front {
+    background-position: 907px 0;
+}
+
+#servic12 .front {
+    background-position: 0px 0px;
+}
+
+#servic1 .back {
+    background-position: 74px 74px;
+}
+
+#servic2 .back {
+    background-position: 160px 74px;
+}
+
+#servic3 .back {
+    background-position: 245px 74px;
+}
+
+#servic4 .back {
+    background-position: 329px 74px;
+}
+
+#servic5 .back {
+    background-position: 412px 74px;
+}
+
+#servic6 .back {
+    background-position: 493px 74px;
+}
+
+#servic7 .back {
+    background-position: 576px 74px;
+}
+
+#servic8 .back {
+    background-position: 659px 74px;
+}
+
+#servic9 .back {
+    background-position: 742px 74px;
+}
+
+#servic10 .back {
+    background-position: 825px 74px;
+}
+
+#servic11 .back {
+    background-position: 907px 74px;
+}
+
+#servic12 .back {
+    background-position: 0px 74px;
+}
+
+/*BOXES*/
+
+.box-item {
+    width: 240px;
+    height: 240px;
+    box-sizing: border-box;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    float: right;
+    position: relative;
+    overflow: hidden;
+}
+
+.box-item div {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.box-item .box-image {
+    width: 240px;
+    height: 240px;
+    position: absolute;
+    background: lightgrey;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+.box-item .box-info {
+    height: 240px;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    background: #0b3f57;
+    color: white;
+    box-sizing: border-box;
+    z-index: 3;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+.box-item .box-info span, .box-item .box-info div {
+    margin: 8px;
+    box-sizing: border-box;
+}
+
+.box-item.bottom-info .box-image {
+    top: -50px;
+    left: 0;
+}
+
+.box-item.bottom-info .box-info {
+    width: 240px;
+    top: 120px;
+    left: 0;
+}
+
+.box-item.bottom-info:hover .box-image {
+    top: 0px;
+}
+
+.box-item.bottom-info:hover .box-info {
+    top: 240px;
+}
+
+.box-item.bottom-info .box-info:hover {
+    top: 0px;
+}
+
+.box-item.right-info .box-image {
+    top: 0;
+    left: -100px;
+}
+
+.box-item.right-info .box-info {
+    top: 0;
+    left: 120px;
+    right: 0;
+}
+
+.box-item.right-info:hover .box-image {
+    left: 0px;
+}
+
+.box-item.right-info:hover .box-info {
+    left: 240px;
+}
+
+.box-item.right-info .box-info:hover {
+    left: 0px;
+}
+
+.box-item.left-info .box-image {
+    top: 0;
+    left: 100px;
+}
+
+.box-item.left-info .box-info {
+    right: 120px;
+    top: 0;
+    left: 0;
+}
+
+.box-item.left-info:hover .box-image {
+    left: 0px;
+}
+
+.box-item.left-info:hover .box-info {
+    right: 240px;
+}
+
+.box-item.left-info .box-info:hover {
+    right: 0px;
+}
+
+.box-item .box-info .title {
+    font-size: 20px;
+}
+
+.box-item .box-info .text {
+    font-size: 13px;
+    margin-top: 15px;
+    display: block;
+}
+
+.box-item .right {
+    float: right;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.box-item .left {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.box-item.green .box-info {
+    background: #7aaf05;
+}
+
+.box-item.green .box-image {
+    background: #96d300;
+}
+
+.box-item.yellow .box-info {
+    background: #eca000;
+}
+
+.box-item.yellow .box-image {
+    background: #fbab02;
+}
+
+.box-item.red .box-info {
+    background: #911a54;
+}
+
+.box-item.red .box-image {
+    background: #b3256a;
+}
+
+/*extra*/
+.extra {
+    width: 240px;
+    height: 311px;
+    background-color: #005e7f;
+    margin-right: 7px;
+    padding: 13px;
+    box-sizing: border-box;
+}
+
+.extra hr {
+    border: none;
+    height: 3px;
+    background-color: white;
+
+}
+
+.com {
+    margin-top: 3px;
+    background-image: url("/static/images/com.png");
+    width: 14px;
+    height: 14px;
+}
+
+.visit {
+    margin-top: 3px;
+    background-image: url("/static/images/visit.png");
+    width: 16px;
+    height: 11px;
+    margin-right: 8px;
+
+}
+
+.ref {
+    margin-top: 3px;
+    background-image: url("/static/images/ref.png");
+    width: 13px;
+    height: 13px;
+    margin-right: 8px;
+}
+
+.bilo-panel {
+    margin-top: 35px;
+    clear: both;
+    font-size: 10.5px;
+}
+
+.bilo {
+    width: 157px;
+    margin-right: 7px;
+}
+
+.extra-title {
+    font-size: 12px;
+    width: 95px;
+}
+
+.rate {
+    background-image: url("/static/images/rate.png");
+    width: 91px;
+    height: 39px;
+    left: -14px;
+    top: -8px;
+}
+
+.rate-h {
+    background-image: url("/static/images/rate-h.png");
+    width: 91px;
+    height: 39px;
+    left: -14px;
+    top: -8px;
+
+}
+
+.list-item {
+    margin-bottom: 10px;
+}

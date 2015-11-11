@@ -1,0 +1,64 @@
+.left-menu {
+    width: 255px;
+}
+
+.left-menu-head {
+    height: 140px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 24px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #a3a3a3;
+}
+
+.head-img {
+    background-image: url("/static/images/menu-head-img.png");
+    width: 255px;
+    height: 85px;
+
+}
+
+.user-img {
+    width: 82px;
+    height: 82px;
+    overflow: hidden;
+    background-color: white;
+    top: 43px;
+    border-radius: 4px;
+    right: 12px;
+
+}
+
+.profile {
+    border: 1px solid black;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+
+/*left-menu-list*/
+.left-menu-list {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #a3a3a3;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.left-list-item {
+    background-image: url("/static/images/left-menu-item.png");
+    width: 11px;
+    height: 17px;
+    margin-left: 11px;
+    margin-top: 7px;
+}
+
+.right-menu-item {
+    background-image: url("/static/images/menu-right-item.png");
+    width: 32px;
+    height: 32px;
+    margin-right: 11px;
+
+}

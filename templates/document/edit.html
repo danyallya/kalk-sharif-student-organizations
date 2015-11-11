@@ -1,0 +1,37 @@
+{% extends 'manager/actions/add_edit.html' %}
+{% load doc_template_tags %}
+
+{% block before_main %}
+
+{#    <div id="doc-map" style="padding: 10px;">#}
+{#        <a href="{% url "edit_document" doc.id %}">{{ doc }}</a>#}
+{##}
+{#        <span>&gt;</span>#}
+{##}
+{#        {% if level_obj %}#}
+{#            {% for level in level_obj|get_parents_level %}#}
+{#                <a href="{% url "edit_level" level.id %}">#}
+{#                    {{ level }}#}
+{#                </a>#}
+{#                <span>&gt;</span>#}
+{#            {% endfor %}#}
+{#        {% endif %}#}
+{##}
+{#    </div>#}
+
+
+{% endblock %}
+
+{% block after_table %}
+
+    {% if doc %}
+
+        <div style="margin: 30px">
+
+            <a class="button_link" href="{% url "edit_document" doc.id %}" target="_blank">
+                ویرایش طبقه های سند
+            </a>
+
+        </div>
+    {% endif %}
+{% endblock %}

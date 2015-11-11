@@ -1,0 +1,53 @@
+{% load doc_template_tags %}
+{% if level.depth == 1 and level.text %}
+    <li>
+        <h1 id="level-{{ level.id }}" class="white level-header"
+            style="background-color:{% hex_to_rgba level.color level.opacity %};margin:0;padding:10px;"
+            data-id="{{ level.id }}">
+            {{ level.title }}
+        </h1>
+        {% elif level.depth == 2 %}
+    <li>
+        <h1 id="level-{{ level.id }}" class="white level-header"
+            style="background-color:{% hex_to_rgba level.color parent.opacity %};margin:0;padding:10px;"
+            data-id="{{ level.id }}">
+            {{ parent.title }} / {{ level.title }}
+
+            <div class="level-extra-div refs_link" rel="group" data-fancybox-type="iframe">
+                <span>{{ level.references_count }}</span>ارجاع
+                <img src="/static/images/page/ref_white.png" class="ref_image"/>
+            </div>
+
+            <div class="level-extra-div comments_link" rel="group" data-fancybox-type="iframe">
+                <span>{{ level.comment_count }}</span>دیدگاه
+                <img src="/static/images/page/comments_white.png"/>
+            </div>
+
+        </h1>
+
+        {% elif level.depth == 3 %}
+    <li>
+        <h2 id="level-{{ level.id }}" class="white  level-header"
+            style="background-color:{% hex_to_rgba level.color level.opacity %};margin:0;padding:10px;"
+            data-id="{{ level.id }}">{{ level.title }}
+
+
+        </h2>
+    </li>
+{% elif level.depth > 3 %}
+    <li>
+        <span class="bullet"></span>
+        <h5 id="level-{{ level.id }}" class="white  level-header"
+            style="background-color:{% hex_to_rgba level.color level.opacity %};margin:0;padding:5px;">{{ level.title }}</h5>
+    </li>
+{% endif %}
+
+{% if level.text %}
+    <ul>
+        <li>
+            <div style="background-color:{% hex_to_rgba level.color 0.1 %};margin:0;padding:5px; text-align: justify;" class="nazanin default-link">
+                {{ level.text|safe }}
+            </div>
+        </li>
+    </ul>
+{% endif %}

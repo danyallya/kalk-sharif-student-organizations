@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+{% load account_template_tags comments_tags %}
+{% block JS %}
+    <script>
+        var sendCommentUrl = '{% url 'send_comment' content_type_id %}';
+        var sendRateUrl = '{% url "experience_send_rate" %}';
+        var objId = {{ experience.id }};
+    </script>
+
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/static/lib/fancybox/jquery.fancybox.css?v=2.1.5"
+          xmlns="http://www.w3.org/1999/html"/>
+    <script type="text/javascript" src="/static/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="/static/lib/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/lib/photo/thumbelina.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/experience/page.css?v=0.1.8">
+    <script src="/static/lib/photo/thumbelina.js?v=1.1"></script>
+
+
+    <script src="/static/experience/page.js?v=0.1.4"></script>
+
+{% endblock %}
+
+
+{% block roadmap %}
+    <a class="absolute pointer head-right" href="{% url "experiences_list" %}">
+        <img class="right pointer head-img" src="/static/images/page/exp-icon.png" height="30">
+
+        <div class="entezar pointer head-right-text right">
+            کالک تجربیات
+        </div>
+    </a>
+    <a class="absolute pointer head-center" href="{% url "experiences_list" %}?s={{ experience.service }}">
+        <img class="right pointer head-img" src="{{ experience.service_icon }}" height="35">
+
+        <div class="entezar pointer head-right-text right">
+            {{ experience.get_service_display }}
+        </div>
+    </a>
+    <a class="absolute pointer head-left" href="">
+        <img class="right pointer head-img" src="/media/{{ experience.image }}" height="35">
+
+        <div class="entezar pointer head-right-text right">
+            {{ experience.title|max_str:11 }}
+        </div>
+    </a>
+{% endblock %}
+
+{% block header %}
+    <img src="/static/images/page/send_pic.jpg" class="send-image" id="send-image-header"/>
+
+    <form id="send-image-form" class="hidden" method="post" action="{% url "experience_send_image" %}"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" id="send-image-file">
+        <input type="hidden" name="experience_id" value="{{ experience.id }}">
+    </form>
+
+    <img src="/static/images/page/share.jpg" id="experience-share-header"/>
+    <img src="/static/images/page/experience_complement.jpg" id="experience-complement-header"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel-part right-panel">
+        <div class="content-head">
+            <h1 class="center entezar large" id="experience-right-title">
+                {{ experience.title }}
+            </h1>
+            <hr/>
+            <img class="experience-image full-width" src="/media/{{ experience.image }}" id="experience-image">
+
+        </div>
+
+
+        <div class="content-head">
+
+            <h1 class="entezar large">
+                فایل های ضمیمه
+            </h1>
+
+            <hr/>
+
+            <div style="width: 100%;display: table;">
+                <a class="attachment entezar tab-link {% if experience.attach_text %}current{% endif %}"
+                   href="javascript:void(0)" id="text-attachment"
+                   data-tab="text-attachment-tab">
+                    <img src="/static/images/page/text.png"/>
+                    متن
+                    ({{ experience.attach_text|length }})
+                </a>
+
+                <a class="attachment entezar tab-link {% if experience.attach_video and not experience.attach_text %}current{% endif %}"
+                   href="javascript:void(0)" id="video-attachment"
+                   data-tab="video-attachment-tab">
+                    <img src="/static/images/page/video.png"/>
+                    ویدیو
+                    ({{ experience.attach_video|length }})
+                </a>
+
+                <a class="attachment entezar tab-link {% if experience.attach_link and not experience.attach_video and not experience.attach_text %}current{% endif %}"
+                   href="javascript:void(0)" id="link-attachment"
+                   data-tab="link-attachment-tab">
+                    <img src="/static/images/page/link.png"/>
+                    لینک
+                    ({{ experience.attach_link|length }})
+                </a>
+
+                <a class="attachment entezar tab-link {% if experience.attach_images and not experience.attach_link and not experience.attach_video and not experience.attach_text %}current{% endif %}"
+                   href="javascript:void(0)" id="image-attachment"
+                   data-tab="image-attachment-tab">
+                    <img src="/static/images/page/pic.png"/>
+                    تصویر
+                    ({{ experience.attach_images|length }})
+                </a>
+            </div>
+
+
+            <div class="small">
+
+                <hr/>
+
+                <div class="attachment-content tab-content {% if experience.attach_text %}current{% endif %}"
+                     id="text-attachment-tab">
+                    {% for attach in experience.attach_text %}
+                        <a href="/media/{{ attach.attach }}" target="_blank">
+                        <span class="right">
+                            دریافت فایل: متن ضمیمه شماره
+                            {{ forloop.counter }}
+                        </span>
+                        <span class="left">
+                            {{ attach.attach.size|filesizeformat_persian }}
+                        </span>
+                        </a>
+                    {% empty %}
+                        موردی موجود نیست
+                    {% endfor %}
+                </div>
+
+                <div class="attachment-content tab-content {% if experience.attach_video and not experience.attach_text %}current{% endif %}"
+                     id="video-attachment-tab">
+                    {% for attach in experience.attach_video %}
+                        <a href="/media/{{ attach.attach }}" target="_blank">
+                        <span class="right">
+                            دریافت فایل: ویدیو ضمیمه شماره
+                            {{ forloop.counter }}
+                        </span>
+                        <span class="left">
+                            {{ attach.attach.size|filesizeformat_persian }}
+                        </span>
+                        </a>
+                    {% empty %}
+                        موردی موجود نیست
+                    {% endfor %}
+                </div>
+
+                <div class="attachment-content tab-content {% if experience.attach_link and not experience.attach_video and not experience.attach_text %}current{% endif %}"
+                     id="link-attachment-tab">
+                    {% for attach in experience.attach_link %}
+                        <a href="/media/{{ attach.attach }}" target="_blank">
+                        <span class="right">
+                            دریافت فایل: لینک ضمیمه شماره
+                            {{ forloop.counter }}
+                        </span>
+                        <span class="left">
+                            {{ attach.attach.size|filesizeformat_persian }}
+                        </span>
+                        </a>
+                    {% empty %}
+                        موردی موجود نیست
+                    {% endfor %}
+                </div>
+
+                <div class="attachment-content tab-content {% if experience.attach_images and not experience.attach_link and not experience.attach_video and not experience.attach_text %}current{% endif %}"
+                     id="image-attachment-tab">
+                    {% for attach in experience.attach_images %}
+                        <a href="/media/{{ attach.attach }}" target="_blank">
+                        <span class="right">
+                            دریافت فایل: تصویری ضمیمه شماره
+                            {{ forloop.counter }}
+                        </span>
+                        <span class="left">
+                            {{ attach.attach.size|filesizeformat_persian }}
+                        </span>
+                        </a>
+                    {% empty %}
+                        موردی موجود نیست
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="experience-related-ex">
+
+            <div class="content_title">
+                <div class="content_title_text vertical_center entezar">
+                    تجربه های مرتبط
+                </div>
+            </div>
+
+            <div class="content">
+
+                {% for ex in related_ex %}
+                    <a class="related-ex-row"
+                       href="{% url 'experience_page' ex.id %}" target="_blank">
+                        <div class="university-arm-div">
+                            <img class="university_arm" src="/media/{{ ex.university.image }}">
+                        </div>
+
+                        <div class="blue bold entezar ex-item">
+                            {{ ex.get_service_display }}
+                        </div>
+
+                        <div class="black bold entezar ex-item">
+                            {{ ex.title }}
+                        </div>
+
+                        <div class="blue bold entezar ex-item">
+                            {{ ex.university.title }}
+
+                            <div class="gray bold">
+                                {{ ex.date|pdate_if_date }}
+                            </div>
+                        </div>
+
+                    </a>
+                {% empty %}
+                    موردی موجود نیست.
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel-part center-panel">
+        <div class="content_title">
+            <img class="university-arm" src="/media/{{ experience.university.image }}">
+
+            <div class="experience_title_text entezar" id="experience-title">
+                {{ experience.university.title|default:experience.uni_temp }}
+            </div>
+            <div class="experience_title_text entezar" id="experience-uni">
+                تشکل:
+                {{ experience.organization|default:"---" }}
+            </div>
+            <div class="experience_title_text entezar" id="experience-author" style="width: 28%;">
+                نویسنده:
+                {{ experience.creator|default:experience.creator_old }}
+            </div>
+            <div class="experience_title_text entezar" id="experience-date" style="width: 15%;">
+                تاریخ:
+                {{ experience.date|pdate_year }}
+            </div>
+        </div>
+
+        <div class="content nazanin" id="experience-content">
+            {{ experience.content|safe }}
+        </div>
+
+        <div class="extra-content" style="height: 27px;padding-top: 6px;">
+            <img src="/static/images/page/tag.png"
+                 style="float: right; height: 25px;margin-left: 5px;">
+
+            <span id="tag-items" class="entezar">
+                {% for tag in experience.tags.all %}
+                    <a href="{% url "experiences_list" %}?t={{ tag.id }}" target="_blank">
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+            </span>
+
+
+                <span class="star-rating" id="experience-rating">
+                    {% for i in "12345" %}
+                        <input type="radio" name="rating" value="{{ i }}" class="rating"{% if rate == i %}
+                               checked="checked"{% endif %}><i></i>
+                    {% endfor %}
+                </span>
+
+            <span class="left mjtitr large" style="margin: 1px;">
+                به این تجربه امتیاز دهید:
+            </span>
+
+        </div>
+
+
+        <div id="image_container" class="entezar">
+
+            <h1 class="right entezar" style="margin-right: 30px;">
+                تصاویر تجربه
+                {{ experience.title }}
+            </h1>
+
+            <div id="show-all-images" class="left">
+                مشاهده همه
+            </div>
+
+            <div class="send-image left" id="send-image-div">
+                بارگزاری تصویرهای شما از این تجربه
+            </div>
+
+            <br/>
+
+            <div id="first-image-line" class="left">
+
+            </div>
+
+            <div id="second-image-line" class="left">
+
+            </div>
+
+            <div id="experience-extra-images">
+                <div id="left-arrow" class="thumbelina-but horiz left"></div>
+                {% if not experience_images %}
+                    <span style="margin-top: 9%;left: 34%;position: absolute;">
+                عکسی در گالری بارگزاری نشده
+                </span>
+                {% endif %}
+                <ul>
+                    {% for image in experience_images %}
+                        <li>
+                            <a class="fancy-image" rel="group" href="/media/{{ image }}">
+                                <img class="ex_image" src="/media/{{ image }}">
+                            </a>
+                        </li>
+                    {% empty %}
+                    {% endfor %}
+                </ul>
+                <div id="right-arrow" class="thumbelina-but horiz right"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel-part left-panel" id="experience-comments-panel">
+        <div class="content_title">
+            <div class="content_title_text vertical_center" style="font-family: 'Entezar', tahoma, sans-serif;">
+                پرسش و پاسخ پیرامون تجربه
+            </div>
+
+            <a href=""><img src="/static/images/page/refresh.png" id="refresh-btn"></a>
+        </div>
+
+        <div class="content" id="comments-div">
+            {% include 'comments/all_comments.html' with content_type_id=content_type_id obj_id=experience.id %}
+        </div>
+    </div>
+
+    <div id="dialog-gallery" class="hidden" title="گالری">
+        {% for image in experience_images %}
+            <span>
+                    <a class="fancy-image" rel="group" href="/media/{{ image }}">
+                        <img class="ex_image" src="/media/{{ image }}">
+                    </a>
+            </span>
+            {% cycle '' '' '' '' '' '' '' '<br/>' %}
+        {% empty %}
+            <span>
+                    موردی موجود نیست.
+                </span>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

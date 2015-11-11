@@ -1,0 +1,26 @@
+{% load comments_tags %}
+
+
+{% render_tree_inline content_type_id obj_id %}
+
+<div class="comment-form{% if extra_class %} {{ extra_class }}{% endif %}" id="comment-form-content">
+
+    <div class="comment-form-submit">
+        ارسال
+    </div>
+
+    {% if not user.is_authenticated %}
+        <input type="text" class="comment-form-name" placeholder="نام:">
+
+        {% if not no_br %}
+            <br/>
+        {% endif %}
+
+        <input type="text" class="comment-form-uni" placeholder="نام دانشگاه:">
+        <br/>
+    {% endif %}
+
+    <textarea name="text" class="comment-form-text" placeholder="دیدگاه:"></textarea>
+
+</div>
+

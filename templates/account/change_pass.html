@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="page-all full-height">
+        <div class="title bold pink">
+            بازیابی رمز عبور
+        </div>
+
+        <div class="page-body full-height center">
+            <form class="all-inputs" method="post" action="">
+                {% csrf_token %}
+                <table class="center-align table-no-border">
+                    <tr>
+                        <td>
+                            نام کاربری:
+                        </td>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            گذرواژه جدید:
+                        </td>
+                        <td class="bold blue">
+                            {{ new_pass }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <span class="left small">
+پس از ورود به سامانه می توانید گذرواژه خود را در صفحه پروفایل تغییر دهید.
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

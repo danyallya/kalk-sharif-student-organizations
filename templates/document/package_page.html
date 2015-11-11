@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% load account_template_tags comments_tags %}
+{% block JS %}
+    <script>
+        var sendCommentUrl = '{% url 'send_comment' content_type_id %}';
+        var sendRateUrl = '{% url "package_send_rate" %}';
+        var objId = {{ package.id }};
+    </script>
+
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/static/lib/fancybox/jquery.fancybox.css?v=2.1.5"
+          xmlns="http://www.w3.org/1999/html"/>
+    <script type="text/javascript" src="/static/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="/static/lib/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/lib/photo/thumbelina.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/experience/page.css?v=0.1.8">
+    <link rel="stylesheet" type="text/css" href="/static/document/package.css?v=0.1.0">
+    <script src="/static/lib/photo/thumbelina.js?v=1.1"></script>
+
+
+    <script src="/static/experience/page.js?v=0.1.4"></script>
+
+
+    {#    <script src="/static/lib/pdfobject.min.js"></script>#}
+
+    <script>
+        $(document).ready(function () {
+            {#                var success = new PDFObject({url: "/media/{{ package.file }}"}).embed("pdf-container");#}
+
+            $('#fullscreen').click(function () {
+                fullScreen(document.getElementById("fullscreen-content"));
+            });
+
+            function fullScreen(element) {
+                if (element.requestFullScreen) {
+                    element.requestFullScreen();
+                } else if (element.webkitRequestFullScreen) {
+                    element.webkitRequestFullScreen();
+                } else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen();
+                }
+            }
+
+            $('#zoomin').click(function () {
+                var $images = $('#package-content').find('img');
+                var old_width = $images.width();
+                if (old_width < 800)
+                    $images.width(old_width + 100);
+            });
+
+            $('#zoomout').click(function () {
+                var $images = $('#package-content').find('img');
+                var old_width = $images.width();
+                if (old_width > 150)
+                    $images.width(old_width - 100);
+            });
+
+            $('#fullscreen-content').scroll(function () {
+                // SCROLL BODY TO TOP OF CONTENT
+                var $body = $('body');
+                var topOfContent = $(this).offset().top;
+                var bodyScroll = $body.scrollTop();
+                if (bodyScroll > topOfContent + 10 || bodyScroll < topOfContent - 70)
+                    $body.animate({scrollTop: topOfContent - 70}, 200);
+            });
+
+        });
+    </script>
+{% endblock %}
+
+{% block roadmap %}
+    <a class="absolute pointer head-right" href="{% url "package_list" %}">
+        <img class="right pointer head-img" src="/static/images/page/exp-icon.png" height="30">
+
+        <div class="entezar pointer head-right-text right">
+            کالک تجربیات
+        </div>
+    </a>
+    <a class="absolute pointer head-center" href="{% url "package_list" %}?ca={{ package.cat.cat }}">
+        <img class="right pointer head-img" src="{{ package.cat.parent_icon }}" height="35">
+
+        <div class="entezar pointer head-right-text right">
+            {{ package.cat.get_cat_display }}
+        </div>
+    </a>
+    <a class="absolute pointer head-left" href="">
+        <img class="right pointer head-img" src="{{ package.pack_image }}" height="35">
+
+        <div class="entezar pointer head-right-text right">
+            {{ package.title|max_str:11 }}
+        </div>
+    </a>
+{% endblock %}
+
+{% block header %}
+    <img src="/static/images/page/upload_modify.png"/>
+    <img src="/static/images/page/share.jpg" id="experience-share-header"/>
+
+    <a href="{% url "package_download" package.id %}" target="_blank">
+        <img src="/static/images/page/download_file.png" id="download_package"/>
+    </a>
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel-part right-panel">
+        <div class="content-head">
+            <h1 class="entezar large" id="experience-right-title" style="text-align: right;">
+                {{ package.title }}
+            </h1>
+
+            <span class="blue bold left entezar" style="    position: absolute;
+    top: 28px;
+    left: 19px;
+    font-size: 0.9em;">
+                ویرایش
+                {{ package.last_change|pdate_year_month }}
+            </span>
+
+            <hr/>
+
+            <img class="experience-image full-width"
+                 src="{% if package.image %}/media/{{ package.image }}{% else %}/static/images/page/pdf_package.png{% endif %}" id="experience-image">
+
+        </div>
+
+
+        <div id="experience-related-ex">
+
+            <div class="content_title">
+                <div class="content_title_text vertical_center entezar">
+                    بسته های پشتیبان مرتبط
+                </div>
+            </div>
+
+            <div class="content">
+
+                {% for pack in related_packages %}
+                    <a class="related-ex-row"
+                       href="{% url "package_page" pack.id %}" target="_blank">
+                        <div class="university-arm-div">
+                            <img class="university_arm" src="/media/{{ pack.image }}">
+                        </div>
+
+                        <div class="blue bold entezar ex-item">
+                            {{ ex.get_service_display }}
+                        </div>
+
+                        <div class="black bold entezar ex-item">
+                            {{ pack.title }}
+                        </div>
+
+                        <div class="blue bold entezar ex-item">
+                            {{ ex.university.title }}
+
+                            <div class="gray bold">
+                                {{ pack.created_on|pdate_if_date }}
+                            </div>
+                        </div>
+
+                    </a>
+                {% empty %}
+                    موردی موجود نیست.
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel-part" style="width: 76%;">
+        <div class="content_title">
+            <img src="/static/images/page/fullscreen.png" class="nav-icon" id="fullscreen">
+            <img src="/static/images/page/zoomout.png" class="nav-icon" id="zoomout">
+            <img src="/static/images/page/zoomin.png" class="nav-icon" id="zoomin">
+
+            <img src="/static/images/page/search.png" class="nav-icon" id="search-icon">
+
+            <input name="search-text" type="text" id="pdf-search" placeholder="جستجو">
+        </div>
+
+        <div class="content nazanin" id="package-content">
+            {#            <object data="/media/{{ package.pdf_file }}" type="application/pdf" width="100%" height="100%"#}
+            {#                    internalinstanceid="8" id="pdf-container"></object>#}
+            <div class="full-height full-width" id="fullscreen-content">
+                {% for image in package.pdf_images %}
+                    <div class="image-wrapper">
+                        <img src="{{ image }}" id="package-image-{{ forloop.counter }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="extra-content" style="height: 27px;padding-top: 6px;">
+            <img src="/static/images/page/tag.png"
+                 style="float: right; height: 25px;margin-left: 5px;">
+
+            <span id="tag-items" class="entezar">
+                {% for tag in package.tags.all %}
+                    <a href="{% url "experiences_list" %}?t={{ tag.id }}" target="_blank">
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+            </span>
+
+
+                <span class="star-rating" id="experience-rating">
+                    {% for i in "12345" %}
+                        <input type="radio" name="rating" value="{{ i }}" class="rating"{% if rate == i %}
+                               checked="checked"{% endif %}><i></i>
+                    {% endfor %}
+                </span>
+
+            <span class="left mjtitr large" style="margin: 1px;">
+                به این بسته امتیاز دهید:
+            </span>
+
+        </div>
+
+
+        <div class="content_title" style="margin-top: 20px;">
+            <div class="content_title_text vertical_center" style="font-family: 'Entezar', tahoma, sans-serif;">
+                اصلاحات شما
+            </div>
+        </div>
+
+        <div class="content" id="comments-div">
+            <div id="package-comments">
+                {% include 'comments/all_comments.html' with content_type_id=content_type_id obj_id=package.id no_br=True %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

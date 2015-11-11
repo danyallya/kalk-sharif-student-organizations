@@ -1,0 +1,430 @@
+{% extends 'base.html' %}
+{% load account_template_tags comments_tags doc_template_tags %}
+{% block JS %}
+    <script>
+        var sendCommentUrl = '{% url 'send_comment' content_type_id %}';
+        var sendRateUrl = '{% url "document_send_rate" %}';
+        var objId = {{ document.id }};
+        var showCommentUrl = '{% url 'show_comments' level_content_type_id %}';
+        var countCommentUrl = '{% url 'comments_count' level_content_type_id %}';
+        var showReferencesUrl = '{% url 'doc_references' %}';
+    </script>
+
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css" href="/static/lib/fancybox/jquery.fancybox.css?v=2.1.5"
+          xmlns="http://www.w3.org/1999/html"/>
+    <script type="text/javascript" src="/static/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="/static/lib/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="/static/document/page.css?v=0.1.5">
+
+    <script src="/static/document/page.js?v=0.1.9"></script>
+
+{% endblock %}
+
+
+{% block roadmap %}
+    <a class="absolute pointer head-right" href="{% url "documents_list" %}">
+        <img class="right pointer head-img" src="/static/images/page/doc_icon.png" height="30">
+
+        <div class="entezar pointer head-right-text right">
+            کالک عملیاتی
+        </div>
+    </a>
+    <a class="absolute pointer head-center" href="{% url "documents_list" %}?s={{ document.service }}">
+        <img class="right pointer head-img" src="{{ document.service_icon }}" height="35">
+
+        <div class="entezar pointer head-right-text right">
+            {{ document.get_service_display }}
+        </div>
+    </a>
+    <a class="absolute pointer head-left" href="">
+        <img class="right pointer head-img" src="/media/{{ document.image }}" height="35">
+
+        <div class="entezar pointer head-right-text right">
+            {{ document.title|max_str:11 }}
+        </div>
+    </a>
+{% endblock %}
+
+{% block header %}
+    <a href="{% if document.file %}{{ document.file.url }}{% else %}javascript:void(0){% endif %}" target="_blank">
+        <img src="/static/images/page/get_action_map.png" id="doc-action-map"/>
+    </a>
+    <img src="/static/images/page/your_experience.png" id="doc-your-experience"/>
+    <img src="/static/images/page/help.png" id="doc-help"/>
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel-part right-panel">
+
+        <div class="content-head" id="doc-page-tree">
+
+
+            <div class="tree">
+
+                {{ levels|render_levels_tree|safe }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel-part center-panel">
+
+        <div id="doc-content">
+            <div class="content" id="sticky-list">
+
+                {{ levels|render_levels_content|safe }}
+
+            </div>
+        </div>
+
+        <div class="extra-content" style="height: 27px;padding-top: 6px;">
+
+            <img src="/static/images/page/tag.png"
+                 style="float: right; height: 25px;margin-left: 5px;">
+
+            <span id="tag-items" class="entezar">
+                {% for tag in document.tags.all %}
+                    <a href="{% url "experiences_list" %}?t={{ tag.id }}" target="_blank">
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+            </span>
+
+                <span class="star-rating" id="document-rating">
+                    {% for i in "12345" %}
+                        <input type="radio" name="rating" value="{{ i }}" class="rating"{% if rate == i %}
+                               checked="checked"{% endif %}><i></i>
+                    {% endfor %}
+                </span>
+
+            <span class="left mjtitr large" style="margin: 1px;">
+            امتیاز شما به این سند:
+            </span>
+        </div>
+
+    </div>
+
+    <div class="panel-part left-panel">
+        <div class="content_title" style="background: none;">
+            <ul class="tabs">
+                <li class="tab-link right entezar bold large" data-tab="comments-div" id="doc-comments-tab">
+                    دیدگاه ها و نظرات
+                </li>
+                <li class="tab-link current left entezar bold large" data-tab="reference-div" id="doc-reference-tab">
+                    تجربیات ارجاع شده
+                </li>
+            </ul>
+            <hr class="tab-line"/>
+        </div>
+
+        <div class="content tab-content current" id="reference-div">
+
+            {% for ex in references %}
+                <a class="related-ex-row" href="{% url 'experience_page' ex.id %}" target="_blank">
+                    <div class="university-arm-div">
+                        <img class="university-arm" src="/media/{{ ex.university.image }}">
+                    </div>
+
+                    <div class="blue bold entezar ex-item">
+                        {{ ex.get_service_display }}
+                    </div>
+
+                    <div class="black bold entezar ex-item">
+                        {{ ex.title }}
+                    </div>
+
+                    <div class="blue bold entezar ex-item">
+                        {{ ex.university.title }}
+
+                        <div class="gray bold">
+                            {{ ex.date|pdate_if_date }}
+                        </div>
+                    </div>
+
+                </a>
+            {% empty %}
+                موردی موجود نیست.
+            {% endfor %}
+
+        </div>
+
+
+        <div class="content tab-content" id="comments-div">
+            {% include 'comments/all_comments.html' with content_type_id=content_type_id obj_id=document.id %}
+        </div>
+
+    </div>
+
+    <div class="panel-part full-panel">
+
+
+        <h1 class="right entezar" style="margin-right: 30px;">
+            بسته های پشتیبان
+        </h1>
+
+        <div id="show-all-images" class="left">
+            مشاهده همه
+        </div>
+
+        <br/>
+
+        <div id="first-image-line" class="left">
+
+        </div>
+
+        <div id="second-image-line" class="left">
+
+        </div>
+
+
+        <div id="packages-container">
+
+            {% for pack in document.packages.all %}
+                <div class="package-item">
+
+                        <span class="is-new-pack">
+                            جدید
+                        </span>
+
+                    <a href="{% url "package_page" pack.id %}">
+                        <img src="{% if pack.image %}/media/
+                            {{ pack.image }}{% else %}/static/images/page/pdf_package.png{% endif %}">
+                    </a>
+
+                    <div class="bottom-bar">
+
+                        <div class="dy-bar">
+                            <span class="pack-name nazanin large">{{ pack.title }}</span>
+
+                            <br/>
+
+                            <a target="_blank" href="{% url "package_download" pack.id %}" class="nazanin large">
+                                دریافت فایل
+                            </a>
+
+                            <a class="nazanin large" target="_blank" href="{% url "package_page" pack.id %}">
+                                مشاهده بسته
+                            </a>
+
+                        </div>
+
+                        <div class="fix-bottom">
+
+                                <span class="nazanin">{{ pack.receive_count }}
+                                بار دانلود
+                                </span>
+
+                            <br/>
+                            <span class="star-rating">
+                                {% for i in "12345" %}
+                                    <input type="radio" name="rating" value="{{ i }}"
+                                           class="rating{% if pack.rate|tostringrate == i %} check{% endif %}"
+                                            {% if pack.rate|tostringrate == i %}
+                                           checked="checked"{% endif %} disabled="disabled"><i></i>
+                                {% endfor %}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    {#                        <a href="{% url "package_page" pack.id %}" class="right"#}
+                    {#                           style="text-align: center;">#}
+                    {#                        </a>#}
+                </div>
+            {% empty %}
+                <span>
+                    موردی موجود نیست.
+                </span>
+            {% endfor %}
+        </div>
+
+
+        <div id="dialog-gallery" class="hidden" title="بسته های پشتیبان">
+            {% for pack in document.packages.all %}
+                <div class="package-item">
+
+                        <span class="is-new-pack">
+                            جدید
+                        </span>
+
+                    <a href="{% url "package_page" pack.id %}">
+                        <img src="{{ pack.pack_image }}">
+                    </a>
+
+                    <div class="bottom-bar">
+
+                        <div class="dy-bar">
+                            <span class="pack-name nazanin large">{{ pack.title }}</span>
+
+                            <br/>
+
+                            <a target="_blank" href="{% url "package_download" pack.id %}" class="nazanin large">
+                                دریافت فایل
+                            </a>
+
+                            <a class="nazanin large" target="_blank" href="{% url "package_page" pack.id %}">
+                                مشاهده بسته
+                            </a>
+
+                        </div>
+
+                        <div class="fix-bottom">
+
+                                <span class="nazanin">{{ pack.receive_count }}
+                                بار دانلود
+                                </span>
+
+                            <br/>
+                            <span class="star-rating">
+                                {% for i in "12345" %}
+                                    <input type="radio" name="rating" value="{{ i }}"
+                                           class="rating{% if pack.rate|tostringrate == i %} check{% endif %}"
+                                            {% if pack.rate|tostringrate == i %}
+                                           checked="checked"{% endif %} disabled="disabled"><i></i>
+                                {% endfor %}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+                <span>
+                    موردی موجود نیست.
+                </span>
+            {% endfor %}
+
+        </div>
+
+
+        <style type="text/css">
+            #packages-container {
+                margin: 0 3%;
+                margin-top: 45px;
+            }
+
+            .package-item {
+                background: #f6f6f6;
+                margin: 10px 1%;
+                width: 18%;
+                position: relative;
+                height: 270px;
+                float: right;
+                overflow: hidden;
+            }
+
+            .package-item img {
+                height: 120px;
+                position: absolute;
+                top: 50px;
+                max-width: 150px;
+                left: 11%;
+            }
+
+            .package-item .is-new-pack {
+                padding: 2px 8px;
+                color: white;
+                background: #ffaa36;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .package-item .dy-bar {
+                color: white;
+                background: #96d300;
+                position: absolute;
+                top: 190px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                height: 90px;
+                overflow: hidden;
+            }
+
+            .package-item .dy-bar a {
+                color: white;
+                background: rgb(129, 180, 0);
+                width: 40%;
+                margin: 5px 1%;
+                padding: 4px 1%;
+                display: inline-block;
+            }
+
+            .package-item .fix-bottom {
+                color: white;
+                background: #96d300;
+                position: absolute;
+                top: 220px;
+                height: 60px;
+                left: 0;
+                width: 100%;
+                text-align: right;
+            }
+
+            .package-item .fix-bottom span {
+                margin-right: 10px;
+            }
+
+            .package-item .star-rating {
+                background: url('/static/images/page/star_d.png');
+                background-size: 15px 15px;
+                width: 75px;
+                height: 16px;
+                float: right;
+            }
+
+            .package-item .star-rating i {
+                background: url('/static/images/page/star_h.png');
+                background-size: 15px 15px;
+            }
+
+            .package-item .star-rating input {
+                cursor: default;
+            }
+
+            .package-item .star-rating input:hover + i {
+                opacity: 0;
+            }
+
+            .package-item .star-rating input.check + i {
+                opacity: 1;
+            }
+        </style>
+
+        <script>
+            $('.package-item').mouseenter(function () {
+                $(this).find('.dy-bar').first().animate({top: ["150px", "easeOutQuad"]}, 350);
+            }).mouseleave(function () {
+                $(this).find('.dy-bar').first().animate({top: ["190px", "easeOutQuad"]}, 350);
+            });
+
+            $('#show-all-images').click(function () {
+                var dialog = $("#dialog-gallery").dialog({
+                    autoOpen: false,
+                    width: '90%',
+                    height: 'auto',
+                    modal: true,
+                    close: function () {
+                    }
+                });
+                dialog.dialog("open");
+            });
+
+        </script>
+
+    </div>
+
+
+
+{% endblock %}

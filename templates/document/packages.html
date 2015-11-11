@@ -1,0 +1,245 @@
+{% extends 'home/base_home.html' %}
+{% load account_template_tags %}
+
+{% block CSS %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/static/home/package_list.css?v=0.0.6"/>
+{% endblock %}
+
+{% block JS %}
+    {{ block.super }}
+
+    <script>
+        var page_url = "{% url "package_list_load" %}";
+    </script>
+
+    <script type="text/javascript" src="/static/home/packages_list.js?v=0.0.6"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="mrg-center bbcnassim">
+
+        <div class="header relative">
+
+            <a class="right header-item-media header-item{% if cat_parent and cat_parent != 1 %} deactivate{% endif %}"
+               href="{% url "package_list" %}?ca=1">
+                <div class="item-media-img"></div>
+                <div class="item-text">
+                    <div class="large">
+                        چند رسانه ای
+                    </div>
+                    <div class="small">
+                        پیامکی، صوتی، نمایشگاه پوستر
+                    </div>
+                </div>
+            </a>
+
+
+            <ul class="absolute list-media list">
+                {% for sub_cat in cat_items.0.sub_cats %}
+                    <li class="list-item">
+                        <a class="no-hover-link" href="{% url "package_list" %}?c={{ sub_cat.id }}">
+                            <img src="{{ sub_cat.icon.url }}" width="41" height="47">
+                        <span class="large white">
+                            {{ sub_cat.title }}
+                        </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a class="right header-item-teacher header-item{% if cat_parent and cat_parent != 2 %} deactivate{% endif %}"
+               href="{% url "package_list" %}?ca=2">
+                <div class="item-teacher-img"></div>
+                <div class="item-text">
+                    <div class="large">
+                        اساتید و اشخاص
+                    </div>
+                    <div class="small">
+                        لیست های مربوط به اساتید
+                    </div>
+                </div>
+            </a>
+
+            <ul class="absolute list-teacher list">
+                {% for sub_cat in cat_items.1.sub_cats %}
+                    <li class="list-item">
+                        <a class="no-hover-link" href="{% url "package_list" %}?c={{ sub_cat.id }}">
+                            <img src="{{ sub_cat.icon.url }}" width="41" height="47">
+                        <span class="large white">
+                            {{ sub_cat.title }}
+                        </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a class="right header-item-location header-item{% if cat_parent and cat_parent != 3 %} deactivate{% endif %}"
+               href="{% url "package_list" %}?ca=3">
+                <div class="item-location-img"></div>
+                <div class="item-text">
+                    <div class="large">
+                        مکان یابی
+                    </div>
+                    <div class="small">
+                        لیست های مکان های مناسب برای اسکان
+                    </div>
+                </div>
+            </a>
+
+            <ul class="absolute list-location list">
+                {% for sub_cat in cat_items.2.sub_cats %}
+                    <li class="list-item">
+                        <a class="no-hover-link" href="{% url "package_list" %}?c={{ sub_cat.id }}">
+                            <img src="{{ sub_cat.icon.url }}" width="41" height="47">
+                        <span class="large white">
+                            {{ sub_cat.title }}
+                        </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a class="right header-item-lib header-item{% if cat_parent and cat_parent != 4 %} deactivate{% endif %}"
+               href="{% url "package_list" %}?ca=4">
+                <div class="item-lib-img"></div>
+                <div class="item-text">
+                    <div class="large ">
+                        کتاب خانه
+                    </div>
+                    <div class="small">
+                        لیست های مطالعاتی و کتابخانه های سیار
+                    </div>
+                </div>
+            </a>
+
+            <ul class="absolute list-lib list">
+                {% for sub_cat in cat_items.3.sub_cats %}
+                    <li class="list-item">
+                        <a class="no-hover-link" href="{% url "package_list" %}?c={{ sub_cat.id }}">
+                            <img src="{{ sub_cat.icon.url }}" width="41" height="47">
+                        <span class="large white">
+                            {{ sub_cat.title }}
+                        </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a class="right header-item-fun header-item{% if cat_parent and cat_parent != 5 %} deactivate{% endif %}"
+               href="{% url "package_list" %}?ca=5">
+                <div class="item-fun-img"></div>
+                <div class="item-text">
+                    <div class="large">
+                        اردویی
+                    </div>
+                    <div class="small">
+                        بازی های داخل اردو و برنامه های تفریحی
+                    </div>
+                </div>
+            </a>
+
+            <ul class="absolute list-fun list">
+                {% for sub_cat in cat_items.4.sub_cats %}
+                    <li class="list-item">
+                        <a class="no-hover-link" href="{% url "package_list" %}?c={{ sub_cat.id }}">
+                            <img src="{{ sub_cat.icon.url }}" width="41" height="47">
+                        <span class="large white">
+                            {{ sub_cat.title }}
+                        </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a class="right header-item-rule header-item{% if cat_parent and cat_parent != 6 %} deactivate{% endif %}"
+               href="{% url "package_list" %}?ca=6">
+                <div class="item-rule-img"></div>
+                <div class="item-text">
+                    <div class="large">
+                        آیین نامه
+                    </div>
+                    <div class="small">
+                        بازی های داخل اردو و برنامه های تفریحی
+                    </div>
+                </div>
+            </a>
+
+            <ul class="absolute list-rule list">
+                {% for sub_cat in cat_items.5.sub_cats %}
+                    <li class="list-item">
+                        <a class="no-hover-link" href="{% url "package_list" %}?c={{ sub_cat.id }}">
+                            <img src="{{ sub_cat.icon.url }}" width="41" height="47">
+                        <span class="large white">
+                            {{ sub_cat.title }}
+                        </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        <form class="search-exp left" action="" method="get">
+            <input class="search-exp-img left" type="submit" value="">
+            <input placeholder="جستجو..." class="box-text white right bbcnassim enter-search" name="q"
+                   {% if q %}value="{{ q }}{% endif %}">
+        </form>
+
+        <div class="show-as left">
+            <div class="show-as-img left"></div>
+            <span class="box-text white right">
+                {% if order_by %}
+                    {{ order_by }}
+                {% else %}
+                    نمایش بر اساس
+                {% endif %}
+            </span>
+        </div>
+
+        <ul class="absolute show-list">
+            <li>
+                <a class="show-as-list left" href="{% url "package_list" %}?o=2">
+
+                    <span class="box-text white right">
+                        پربازدیدترین
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a class="show-as-list left" href="{% url "package_list" %}?o=1">
+
+                    <span class="box-text white right">
+                        جدیدترین
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a class="show-as-list left" href="{% url "package_list" %}?o=3">
+
+                    <span class="box-text white right">
+                        پرامتیازترین
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="item-list">
+            {% for obj in packages %}
+                {% include 'document/packages_list_item.html' with obj=obj %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <br/>
+
+    <a href="{% url "send_package" %}" style="clear: both;display: block;">
+        <h1>
+            بارگزاری بسته پشتیبان
+        </h1>
+    </a>
+
+{% endblock %}

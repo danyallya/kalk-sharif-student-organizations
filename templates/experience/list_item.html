@@ -1,0 +1,44 @@
+{% load account_template_tags %}
+
+<div class="item right" data-id="{{ obj.id }}">
+
+    <a class="main-item-on radius no-hover-link" style="z-index: {{ order }};"
+       href="{% url "experience_page" experience_id=obj.id %}">
+        <div class="item-on-text right">
+                    <span class="text-header entezar white">
+                        {{ obj.title }}
+                    </span>
+
+            <div class="item-servis MjTunisia">
+                <img class="right" src="{{ obj.service_icon }}" width="28" height="28">
+                        <span class="servis-text right">
+                            {{ obj.get_service_display }}
+                        </span>
+            </div>
+            <div class="item-uni MjTunisia">
+                {% if obj.university.image %}
+                <img class="right" src="{{ obj.university.image.url }}" width="18" height="18">
+                {% endif %}
+                        <span class="uni-text right">
+                            {{ obj.university.title|default:obj.uni_temp }}
+                        </span>
+            </div>
+            <div class="item-time MjTunisia">
+                <img class="right" src="/static/images/calu.png" width="15" height="14">
+                        <span class="right">
+                            {{ obj.date|pdate_year_month_day }}
+                        </span>
+            </div>
+        </div>
+        <img class="right" src="{{ obj.cropped_image }}" width="127" height="292">
+    </a>
+
+    <div class="main-item bbcnassim radius">
+        <div>
+            {{ obj.content_brief|safe }}
+        </div>
+    </div>
+
+</div>
+
+

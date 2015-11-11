@@ -1,0 +1,251 @@
+
+#doc-page-tree {
+    height: 611px;
+    overflow-y: auto;
+}
+
+#sticky-list {
+    height: 573px;
+    overflow-y: auto;
+    margin-top: 0;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    position: relative;
+    padding: 0;
+}
+
+.tree li {
+    font-family: 'Entezar', tahoma, sans-serif;
+}
+
+#main-doc-content h1, #main-doc-content h2, #main-doc-content h3, #main-doc-content h4, #main-doc-content h5 {
+    font-family: 'Entezar', tahoma, sans-serif;
+    line-height: 25px;
+}
+
+#main-doc-content p {
+    font-family: 'BNazanin', tahoma, sans-serif;
+}
+
+.level-tree-extra-div {
+    display: inline;
+    float: left;
+    cursor: pointer;
+    padding-right: 7px;
+    color: black;
+}
+
+.level-tree-extra-div img {
+    width: 15px;
+    position: relative;
+    top: 3px;
+}
+
+.level-extra-div {
+    display: inline;
+    float: left;
+    cursor: pointer;
+    border-right: 2px solid white;
+    padding-right: 7px;
+    vertical-align: top;
+}
+
+.level-extra-div.refs_link {
+    margin-right: 5px;
+}
+
+.level-extra-div img {
+    width: 26px;
+    position: relative;
+    top: 7px;
+}
+
+.level-extra-div img.ref_image {
+    top: 5px;
+}
+
+.tab-line {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    height: 4px;
+    border: none;
+    background-color: #01112b;
+}
+
+#reference-div {
+    height: 522px;
+    overflow: auto;
+}
+
+.related-ex-row {
+    margin-bottom: 15px;
+    display: table;
+    position: relative;
+}
+
+.university-arm-div {
+    width: 32%;
+    position: relative;
+    float: right;
+    margin-left: 3%;
+}
+
+.university-arm-div img {
+    width: 100%;
+}
+
+.ex-item {
+    width: 63%;
+    position: relative;
+    float: right;
+}
+
+.ex-item div {
+    position: relative;
+    float: left;
+}
+
+.content-head {
+    margin-bottom: 10px;
+    background-color: #FFF;
+}
+
+.content-head hr {
+    background-color: black;
+    border: 0;
+    height: 4px;
+}
+
+.content {
+    margin-top: 10px;
+    padding: 0 10px 3px;
+    background-color: #FFF;
+    position: relative;
+}
+
+#refresh-btn {
+    position: absolute;
+    top: 10px;
+    left: 6%;
+    height: 30px;
+}
+
+.attachment {
+    width: 25%;
+    float: right;
+    text-align: center;
+    color: black;
+}
+
+.attachment img {
+    width: 45%;
+    margin: 10px 10% 0;
+}
+
+.extra-content {
+    padding: 0 10px 3px;
+    background-color: #eae8e8;
+}
+
+.bullet {
+    display: inline-block;
+    margin: 12px;
+    float: right;
+    width: 7px;
+    height: 7px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.ex_image {
+    float: right;
+    opacity: 0.6;
+    height: 195px;
+    width: 195px;
+    cursor: pointer;
+}
+
+.ex_image:hover {
+    opacity: 1;
+}
+
+#comments-div {
+    height: 518px;
+}
+
+#comments-div ul {
+    padding: 0;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 180px;
+    left: 0;
+}
+
+/* EDIT LEVEL */
+.add-level-item {
+    margin: 2%;
+}
+
+.add-level-item > span {
+    float: right;
+    color: black;
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+.add-level-item .level-text {
+    width: 50%;
+}
+
+.add-level-item .ui-button-text-only .ui-button-text {
+    padding: .1em 1em;
+}
+
+#show-all-images {
+    border: 2px solid #e95b57;
+    width: 10%;
+    text-align: center;
+    border-radius: 18px;
+    padding: 0 6px;
+    margin-top: 15px;
+    margin-left: 25px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+#first-image-line {
+    background: #e95b57;
+    width: 13%;
+    height: 3px;
+    margin-left: 20px;
+    margin-right: 1%;
+    clear: both;
+}
+
+#second-image-line {
+    background: #959595;
+    width: 80%;
+    height: 3px;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#send-image-div {
+    border: 2px solid #959595;
+    border-radius: 18px;
+    padding: 0 9px;
+    margin-left: 30px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.full-panel {
+    width: 96%;
+    background-color: white;
+    margin-right: 1%;
+}

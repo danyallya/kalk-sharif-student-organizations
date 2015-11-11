@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load doc_template_tags %}
+
+
+{% block JS %}
+    <script>
+        var objId = {{ document.id }};
+        var docContentUrl = '{% url 'doc_content' document.id %}';
+        var addLevelUrl = '{% url 'add_level' document.id %}';
+        var showCommentUrl = '{% url 'show_comments' level_content_type_id %}';
+        var countCommentUrl = '{% url 'comments_count' level_content_type_id %}';
+        var showReferencesUrl = '{% url 'doc_references' %}';
+        var deleteLevelUrl = '{% url 'delete_level' %}';
+    </script>
+
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css" href="/static/lib/fancybox/jquery.fancybox.css?v=2.1.5"
+          xmlns="http://www.w3.org/1999/html"/>
+    <script type="text/javascript" src="/static/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="/static/lib/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/lib/photo/thumbelina.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/document/page.css?v=0.1.3">
+    <script src="/static/lib/photo/thumbelina.js"></script>
+
+    <script src="/static/document/page.js?v=0.1.8"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="tree-container">
+
+        <div class="tree">
+
+            {{ levels|render_edit_levels_tree|safe }}
+
+        </div>
+
+    </div>
+
+
+    <div id="doc-preview">
+
+        <h1>
+            پیش نمایش:
+        </h1>
+
+        <div class="content" id="sticky-list">
+
+
+        </div>
+
+    </div>
+
+    <style type="text/css">
+
+        #sticky-list {
+            height: 573px;
+            overflow-y: auto;
+            margin-top: 0;
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 700;
+            position: relative;
+            padding: 0;
+        }
+
+        #doc-preview {
+            float: left;
+            width: 68%;
+        }
+
+        #tree-container {
+            float: right;
+            width: 30%;
+        }
+    </style>
+
+    <script>
+
+        function rebuildPreview() {
+
+            $.ajax({
+                type: 'GET',
+                url: docContentUrl,
+                success: function (res) {
+                    $('#sticky-list').html(res);
+                    reStick();
+                }
+            });
+
+        }
+
+
+        $(document).on('click', '.add-level', function () {
+            var $text_input = $(this).parent().find('.level-text');
+            var text = $text_input.val();
+            var level_id = $(this).parents('.level-list').first().attr("data-level-id");
+
+            var $level_list = $(this).parents('ul').first();
+
+            if (text == "") {
+                alert("عنوان نمی تواند خالی باشد.");
+                return false;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: addLevelUrl,
+                data: {
+                    'id': level_id,
+                    'text': text
+                },
+                success: function (msg) {
+                    var data = eval(msg);
+                    if (msg.s) {
+                        $level_list.find('.add-level-item').last().before(data.res);
+                        checkButtons();
+                        rebuildPreview();
+                        provideFancyBoxes();
+                    }
+                }
+            });
+
+        });
+
+
+        $(document).on('click', '.delete-level', function (e) {
+            var $level_list = $(this).parents('.level-list').first();
+            var level_id = $level_list.attr("data-level-id");
+
+            if (confirm("آیا از حذف این طبقه و همه زیر طبقه های آن اطمینان دارید؟"))
+                $.ajax({
+                    type: 'POST',
+                    url: deleteLevelUrl,
+                    data: {
+                        'id': level_id
+                    },
+                    success: function (msg) {
+                        var data = eval(msg);
+                        if (msg.s) {
+                            $level_list.remove();
+                            rebuildPreview();
+                        }
+                    }
+                });
+
+            e.preventDefault();
+            e.stopPropagation();
+
+        });
+
+        function provideFancyBoxes() {
+
+            $('.edit-level').each(function (e) {
+                $(this).fancybox({
+                    helpers: {
+                        overlay: {
+                            css: {
+                                'background': 'rgba(194,194,194, 0.5)',
+                                'overflow': 'auto'
+                            }
+                        }
+                    },
+                    padding: 0,
+                    afterClose: function () {
+                        rebuildPreview();
+                    },
+                    height: 200,
+                    width: 800
+                });
+            });
+
+        }
+
+        rebuildPreview();
+
+        provideFancyBoxes();
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    {% block CSS %}
+        <link rel="stylesheet" type="text/css" href='/static/lib/form-validation/validationEngine.jquery.css'/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css?v=0.2.2"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/jquery-ui/jquery-ui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/select2/select2.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/select2/select2-override.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/alertify/alertify.core.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/alertify/alertify.default.css">
+        <link rel="stylesheet" type="text/css" href="/static/manager/actions.css?v=0.1.0"/>
+    {% endblock %}
+    {% block JS %}
+        <script type="text/javascript" src="/static/lib/jquery-1.10.2.min.js"></script>
+        <script>
+            var django = {jQuery: jQuery};
+        </script>
+        <script type="text/javascript" src="/static/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/static/lib/jquery.ui.datepicker-cc.all.min.js"></script>
+        <script type="text/javascript" src="/static/lib/alertify/alertify.min.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.datepicker-cc.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/calendar.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.datepicker-cc-ar.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.datepicker-cc-fa.js"></script>
+        <script type="text/javascript" src="/static/lib/select2/select2.min.js"></script>
+        <script type="text/javascript" src="/static/lib/select2/select2_locale_fa.js"></script>
+        <script type="text/javascript" src="/static/lib/jquery.formset.min.js"></script>
+{#        <script type="text/javascript"#}
+{#                src='/static/lib/form-validation/languages/jquery.validationEngine-fa.js'></script>#}
+{#        <script type="text/javascript" src='/static/lib/form-validation/jquery.validationEngine.js'></script>#}
+        <script type="text/javascript" src='/static/manager/actions.js'></script>
+        <script type="text/javascript" src="/static/base.js?v=0.1.11"></script>
+    {% endblock %}
+
+</head>
+<body>
+
+<div class="panel panel-info form-div">
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+</body>
+</html>

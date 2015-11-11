@@ -1,0 +1,7 @@
+
+.idea/
+*.pyc
+*.sqlite3
+media/*
+*/local.py
+*.json

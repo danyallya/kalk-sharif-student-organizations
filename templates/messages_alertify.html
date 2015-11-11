@@ -1,0 +1,11 @@
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            {% if 'error' in message.tags %}
+                alertify.error("{{ message }}");
+            {% else %}
+                alertify.success("{{ message }}");
+            {% endif %}
+        </script>
+    {% endfor %}
+{% endif %}

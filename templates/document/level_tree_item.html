@@ -1,0 +1,53 @@
+{% load doc_template_tags %}
+<li class="level-list{% if edit %} parent{% endif %}" data-level-id="{{ level.id }}" id="level-link-{{ level.id }}">
+
+    {% if level.depth == 2 and not edit %}
+        <div style="background-color:{% hex_to_rgba level.color level.opacity %};"
+             data-id="{{ level.id }}" class="tree-item">
+
+            {#            <a href="#level-{{ level.id }}" class="tree-link">{{ level.title }}</a>#}
+            <a href="javascript:void(0)" class="tree-link">{{ level.title }}</a>
+
+            <div class="level-tree-extra-div refs_link" rel="group" data-fancybox-type="iframe">
+                <span>{{ level.references_count }}</span>
+                <img src="/static/images/page/ref_black.png" class="ref_image"/>
+            </div>
+
+            <div class="level-tree-extra-div comments_link" rel="group" data-fancybox-type="iframe">
+                <span>{{ level.comment_count }}</span>
+                <img src="/static/images/page/comments_black.png"/>
+            </div>
+
+        </div>
+    {% else %}
+
+
+        <div style="background-color:{% hex_to_rgba level.color level.opacity %};" class="tree-item" data-id="{% if level.depth == 1 and not level.text %}{{ level|first_child }}{% else %}{{ level.id }}{% endif %}">
+
+
+            {#            <a href="#level-{{ level.id }}">{{ level.title }}</a>#}
+            <a href="javascript:void(0)">{{ level.title }}</a>
+
+            {% if edit %}
+
+                <div class="level-tree-extra-div delete-level">
+                    <span class="white">
+                        حذف
+                    </span>
+                </div>
+
+                <div class="level-tree-extra-div edit-level" href="{% url 'edit_level' level.id %}" rel="group"
+                     data-fancybox-type="iframe">
+                    <span class="white">
+                        ویرایش
+                    </span>
+                </div>
+
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+    {{ children_content|safe }}
+
+</li>

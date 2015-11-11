@@ -1,0 +1,134 @@
+{% extends 'home/base_home.html' %}
+{% load account_template_tags %}
+
+{% block CSS %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/static/home/exp_list.css?v=0.0.5"/>
+{% endblock %}
+
+{% block JS %}
+    {{ block.super }}
+
+    <script>
+        var tag_url = "{% url "tag_search" %}";
+        var uni_url = "{% url "uni_search" %}";
+        var page_url = "{% url "experiences_list_load" %}";
+    </script>
+
+    <script type="text/javascript" src="/static/home/exp_list.js?v=0.0.4"></script>
+{% endblock %}
+
+{% block content %}
+
+    <form class="exp-header relative" action="" method="get" autocomplete="off">
+
+        <select class="right header-item uni absolute" name="uni" disabled="disabled">
+            <option value="" selected>
+                {% if uni %}
+                    {{ uni.title }}
+                {% else %}
+                    انتخاب دانشگاه
+                {% endif %}
+            </option>
+        </select>
+
+        <div class="choose-uni absolute">
+
+            <select class="choose-item" name="uni-state" id="uni-state">
+                <option value="" selected>
+                    انتخاب استان
+                </option>
+                {% for state in states %}
+                    <option value="{{ state.id }}" {% if uni.state_id == state.id %}selected="selected"{% endif %}>
+                        {{ state.title }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <select class="choose-item" name="uni-type" id="uni-type">
+                <option value="" selected>
+                    انتخاب نوع دانشگاه
+                </option>
+                <option value="1" {% if uni.uni_type == 1 %}selected="selected"{% endif %}>
+                    دولتی
+                </option>
+                <option value="2" {% if uni.uni_type == 2 %}selected="selected"{% endif %}>
+                    آزاد
+                </option>
+                <option value="3" {% if uni.uni_type == 3 %}selected="selected"{% endif %}>
+                    پیام نور
+                </option>
+            </select>
+
+            <select class="choose-item" name="uni" id="uni-select">
+                <option value="" disabled selected>
+                    انتخاب دانشگاه
+                </option>
+                {% for obj in uni_list %}
+                    <option value="{{ obj.id }}"
+                            {% if obj.id == uni.id %}selected="selected"{% endif %}>
+                        {{ obj.title }}
+                    </option>
+                {% endfor %}
+            </select>
+
+        </div>
+
+        <select class="right header-item service" name="s">
+            <option value="" {% if not s %}selected{% endif %}>
+                انتخاب سرویس
+            </option>
+            {% for id, service in services %}
+                <option name="service" value="{{ id }}"
+                        {% if s|to_int == id %}selected{% endif %}>{{ service }}</option>
+            {% endfor %}
+        </select>
+
+        <input class="right header-item" id="tag-search" name="tn"{% if tn %} value="{{ tn }}"{% endif %}
+               placeholder="انتخاب برچسب" onfocus="this.placeholder = ''" onblur="this.placeholder ='انتخاب برچسب'">
+        <input type="hidden" name="t" id="tag-id"{% if t %} value="{{ t }}"{% endif %}>
+
+        <ul id="tag-res" class="absolute">
+
+        </ul>
+
+        <select class="right header-item date" name="y">
+            <option value="" {% if not y %}selected{% endif %}>
+                تاریخ
+            </option>
+            {% for year in 20|get_years %}
+                <option name="service" value="{{ year }}"
+                        {% if y|to_int == year %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+
+        <input class="right header-item-left entezar" type="submit" value="اعمال فیلتر">
+
+    </form>
+
+
+    <a class="item right add" href="{% url "add_experience" %}">
+
+        <div class="main-item-on radius">
+            <div class="main-item-img"></div>
+            <span class="main-item-text entezar">
+                افزودن تجربه
+            </span>
+        </div>
+
+        <div class="main-item bbcnassim radius">
+            <div>
+            </div>
+        </div>
+
+    </a>
+
+    <div class="item-list">
+        {% for obj in experiences %}
+
+            {% include 'experience/list_item.html' with obj=obj order=forloop.revcounter %}
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

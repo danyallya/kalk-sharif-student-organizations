@@ -1,0 +1,120 @@
+{% load account_template_tags %}
+{% load date_template_tags %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}کالک | {% get_current_menu_name menus %}{% endblock %}</title>
+    <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+    {#    <link rel="shortcut icon" href="/static/favicon.ico">#}
+
+    {% block CSS %}
+        <link rel="stylesheet" type="text/css" href="/static/base.css?v=0.2.2"/>
+        <link rel="stylesheet" type="text/css" href="/static/old_base.css?v=0.1.2"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/jquery-ui/jquery-ui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/alertify/alertify.core.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/alertify/alertify.default.css">
+    {% endblock %}
+
+    {% block JS %}
+        <script type="text/javascript" src="/static/lib/jquery-1.10.2.min.js"></script>
+        <script>
+            var django = {jQuery: jQuery};
+        </script>
+        <script type="text/javascript" src="/static/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/static/lib/alertify/alertify.min.js"></script>
+        <script type="text/javascript" src="/static/base.js"></script>
+    {% endblock %}
+
+
+</head>
+
+<body class="main_container">
+
+<div id="header">
+    <a href="/"> <img class="logo" src="/static/images/logo.png"> </a>
+
+    {% block header %}
+    {% endblock %}
+</div>
+
+{% include 'messages_alertify.html' %}
+
+<article id="content">
+    <style type="text/css">
+
+        #container {
+            background: #FFF;
+            border: 1px solid #CCC;
+            width: 28em;
+            min-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 40px;
+            -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        }
+
+        #container h1 {
+            margin: 0;
+            background-color: #6AD6DE;
+            color: #FFF;
+        }
+
+        #container input {
+            background: white;
+            border-radius: 0;
+            padding: 5px;
+            margin: 0 auto;
+        }
+
+        #container form {
+            text-align: center;
+        }
+
+        .errorlist {
+            background-color: red;
+            color: white;
+        }
+    </style>
+
+    <div id="container">
+
+        <h1>
+            ورود
+        </h1>
+
+        <form action="" method="post" id="login-form">
+            {% csrf_token %}
+
+            <label for="username">نام کاربری</label>
+            <br/>
+            <input type="text" name="username" id="username"/>
+            <br/>
+
+            <label for="password">گذرواژه</label>
+            <br/>
+            <input type="password" name="password" id="password"/>
+            <br/>
+
+
+            <p>
+                <input type="submit" name="submit" value="ورود"/>
+            </p>
+            <a href="{% url "signup" %}">
+                ثبت نام
+            </a>
+
+        </form>
+    </div>
+
+    <script type="text/javascript">
+    </script>
+
+</article>
+
+
+</body>
+
+</html>

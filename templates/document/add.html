@@ -1,0 +1,12 @@
+{% extends base_html %}
+
+{% block after_main %}
+    <div id="formset_div">
+        {% if image_formset %}
+            {% include 'formset.html' with legend="گالری" formset=image_formset %}
+        {% endif %}
+        {% if attach_formset %}
+            {% include 'formset.html' with legend="ضمائم" formset=attach_formset %}
+        {% endif %}
+    </div>
+{% endblock %}

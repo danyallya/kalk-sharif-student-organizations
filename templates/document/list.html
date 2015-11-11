@@ -1,0 +1,252 @@
+{% extends 'home/base_home.html' %}
+{% load account_template_tags %}
+
+{% block CSS %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/static/home/doc_list.css?v=0.0.9"/>
+{% endblock %}
+
+{% block JS %}
+    {{ block.super }}
+    <script type="text/javascript" src="/static/doc_list.js?v=0.0.8"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="mrg-center services">
+
+        {% for id, service in services %}
+            <a class="right card-container no-hover-link{% if active_service|to_int == id %} active{% endif %}"
+               href="{% url 'documents_list' %}?s={{ id }}">
+                <div class="right card relative" id="servic{{ id }}">
+                    <div class="absolute servic front face"></div>
+                    <div class="absolute back face center bbcnassim bold{% if id == 3 or id == 9 or id == 10 or id == 11 %} padded{% endif %}">
+
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+
+    </div>
+
+    {% for obj in documents %}
+        <a class="box-item no-hover-link {{ obj.animate_css_class }}" href="{% url "document_page" obj.id %}">
+
+            <img src="{{ obj.cropped_image }}" class="box-image" id="box-image-{{ obj.id }}">
+
+            <div class="box-info" style="background: {{ obj.color }}" id="box-info-{{ obj.id }}">
+
+                <span class="entezar title">
+                    {{ obj.title }}
+                </span>
+
+                <div class="bbcnassim text">
+                    {{ obj.get_list_text }}
+                </div>
+
+            </div>
+        </a>
+    {% endfor %}
+
+    {% for  i in 12|discount:documents.count|get_range %}
+        <div class="box-item right-info {% cycle 'green' 'yellow' 'red' %}">
+
+            <div class="box-image" id="box-image-fake-{{ i }}"></div>
+
+            <div class="box-info" id="box-info-fake-{{ i }}"></div>
+
+        </div>
+    {% endfor %}
+
+    <div class="extra right white BYekan">
+        <span class="extra-header">
+            پربازدید ترین ها
+        </span>
+        <hr>
+
+        {% for doc in visited_docs %}
+            <a class="table clear list-item" href="{% url 'document_page' doc.id %}">
+                <img class="right" src="{{ doc.cropped_image }}" width="50" height="50">
+
+                <div class="right bilo relative">
+                    <div>
+                        <span class="right extra-title">
+                            {{ doc.title }}
+                        </span>
+
+                        <div class="rate absolute"></div>
+                        <div class="rate-h absolute" data-rate="{{ doc.rate }}"></div>
+
+                    </div>
+                    <div class="bilo-panel">
+                        <div class="right com"></div>
+                        <div class="right ">
+                            {{ doc.comment_count }}
+                            نظر
+                        </div>
+                        <div class="right visit"></div>
+                        <div class="right ">
+                            {{ doc.visitor_count }}
+                            بازدید
+                        </div>
+                        <div class="right ref"></div>
+                        <div class="right ">
+                            {{ doc.ref_count }}
+                            ارجاع
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="extra right white BYekan">
+        <span class="extra-header">
+پرامتیازترین ها
+        </span>
+        <hr>
+
+        {% for doc in rated_docs %}
+            <a class="table clear list-item" href="{% url 'document_page' doc.id %}">
+                <img class="right" src="{{ doc.cropped_image }}" width="50" height="50">
+
+                <div class="right bilo relative">
+                    <div>
+                        <span class="right extra-title">
+                            {{ doc.title }}
+                        </span>
+
+                        <div class="rate absolute"></div>
+                        <div class="rate-h absolute" data-rate="{{ doc.rate }}"></div>
+
+                    </div>
+                    <div class="bilo-panel">
+                        <div class="right com"></div>
+                        <div class="right ">
+                            {{ doc.comment_count }}
+                            نظر
+                        </div>
+                        <div class="right visit"></div>
+                        <div class="right ">
+                            {{ doc.visitor_count }}
+                            بازدید
+                        </div>
+                        <div class="right ref"></div>
+                        <div class="right ">
+                            {{ doc.ref_count }}
+                            ارجاع
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="extra right white BYekan">
+        <span class="extra-header">
+            پربحث ترین ها
+        </span>
+        <hr>
+
+        {% for doc in commented_docs %}
+            <a class="table clear list-item" href="{% url 'document_page' doc.id %}">
+                <img class="right" src="{{ doc.cropped_image }}" width="50" height="50">
+
+                <div class="right bilo relative">
+                    <div>
+                        <span class="right extra-title">
+                            {{ doc.title }}
+                        </span>
+
+                        <div class="rate absolute"></div>
+                        <div class="rate-h absolute" data-rate="{{ doc.rate }}"></div>
+
+                    </div>
+                    <div class="bilo-panel">
+                        <div class="right com"></div>
+                        <div class="right ">
+                            {{ doc.comment_count }}
+                            نظر
+                        </div>
+                        <div class="right visit"></div>
+                        <div class="right ">
+                            {{ doc.visitor_count }}
+                            بازدید
+                        </div>
+                        <div class="right ref"></div>
+                        <div class="right ">
+                            {{ doc.ref_count }}
+                            ارجاع
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="extra right white BYekan">
+        <span class="extra-header">
+            برگزیده ها
+        </span>
+        <hr>
+        {% for doc in spec_docs %}
+            <a class="table clear list-item" href="{% url 'document_page' doc.id %}">
+                <img class="right" src="{{ doc.cropped_image }}" width="50" height="50">
+
+                <div class="right bilo relative">
+                    <div>
+                <span class="right extra-title">
+                    {{ doc.title }}
+                </span>
+
+                        <div class="rate absolute"></div>
+                        <div class="rate-h absolute" data-rate="{{ doc.rate }}"></div>
+
+                    </div>
+                    <div class="bilo-panel">
+                        <div class="right com"></div>
+                        <div class="right ">
+                            {{ doc.comment_count }}
+                            نظر
+                        </div>
+                        <div class="right visit"></div>
+                        <div class="right ">
+                            {{ doc.visitor_count }}
+                            بازدید
+                        </div>
+                        <div class="right ref"></div>
+                        <div class="right ">
+                            {{ doc.ref_count }}
+                            ارجاع
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </a>
+        {% endfor %}
+    </div>
+
+
+
+
+
+{% endblock %}

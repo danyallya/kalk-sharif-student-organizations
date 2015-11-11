@@ -1,0 +1,39 @@
+<div class="right box-item relative item">
+    <img class="item-img" src="{{ obj.pack_image }}" width="205" height="220"/>
+
+    <div class="box-item-bottom relative">
+
+        <div class="white absolute box-item-text">
+            <span>{{ obj.title }}</span>
+
+            <a class="right show-file" href="{% url "package_page" obj.id %}">
+                نمایش فایل
+            </a>
+            <a class="right download-file" href="{% url "package_download" obj.id %}">
+                دریافت فایل
+            </a>
+        </div>
+
+        <div class="white item-text-bottom absolute">
+            {{ obj.receive_count }}
+            بار دانلود
+        </div>
+
+        <div class="absolute rate">
+        </div>
+
+        <div class="absolute rate-h" data-rate="{{ obj.rate }}">
+        </div>
+
+        <img class="share absolute" src="/static/images/item-share.png" width="30" height="32">
+
+        <a href="{% url "package_list" %}?ca={{ obj.cat.cat }}">
+            <img class="type absolute" src="{{ obj.cat.parent_icon }}" width="30" height="32">
+        </a>
+
+        <a href="{% url "package_list" %}?c={{ obj.cat.id }}">
+            <img class="sub-type absolute" src="{{ obj.cat.icon.url }}" width="30" height="32">
+        </a>
+
+    </div>
+</div>

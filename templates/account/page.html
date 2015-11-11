@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block  content %}
+
+
+    {% if user.notifications %}
+        <fieldset>
+            <legend>
+                صندوق پیام
+            </legend>
+
+            {% for notification in user.notifications %}
+                <div>
+
+                    {{ notification.title }} - {{ notification.text }} -
+
+                    <a href="{% url "seen_notification" notification.id %}">
+                        &#10004;
+                    </a>
+
+                </div>
+            {% endfor %}
+        </fieldset>
+    {% endif %}
+    <a href="{% url "edit_account" %}">
+        <h1>
+            ویرایش حساب کاربری
+        </h1>
+    </a>
+
+    {% if upgrade_perm %}
+        <a href="{% url "upgrade" %}">
+            <h1>
+                درخواست ارتقا سطح کاربری
+            </h1>
+        </a>
+    {% endif %}
+
+    {% if view_users_perm %}
+        <a href="{% url "account_manager" %}">
+            <h1>
+                مدیریت اعضا
+            </h1>
+        </a>
+    {% endif %}
+
+    {% if manage_exp %}
+        <a href="{% url "experience_manager" %}">
+            <h1>
+                مدیریت تجربه ها
+            </h1>
+        </a>
+    {% endif %}
+
+    {% if manage_upgrade_perm %}
+        <a href="{% url "upgrade_request_manager" %}">
+            <h1>
+                مدیریت درخواست های ارتقا
+            </h1>
+        </a>
+    {% endif %}
+
+
+
+    {% if is_admin %}
+
+        <a href="{% url "document_manager" %}">
+            <h1>
+                مدیریت سند ها
+            </h1>
+        </a>
+
+        <a href="{% url "spec_doc_manager" %}">
+            <h1>
+                مدیریت اسناد برگزیده
+            </h1>
+        </a>
+
+        <a href="{% url "backup_manager" %}">
+            <h1>
+                مدیریت بسته های پشتیبان
+            </h1>
+        </a>
+
+        <a href="{% url "package_sub_manager" %}">
+            <h1>
+                مدیریت دسته های بسته پشتیبان
+            </h1>
+        </a>
+
+        <a href="{% url "help_manager" %}">
+            <h1>
+                مدیریت راهنما
+            </h1>
+        </a>
+
+        <a href="{% url "tag_manager" %}">
+            <h1>
+                مدیریت تگ ها
+            </h1>
+        </a>
+
+        <a href="{% url "university_manager" %}">
+            <h1>
+                مدیریت دانشگاه ها
+            </h1>
+        </a>
+
+        <a href="{% url "organization_manager" %}">
+            <h1>
+                مدیریت تشکل ها
+            </h1>
+        </a>
+
+        <a href="{% url "gallery_manager" %}">
+            <h1>
+                مدیریت گالری ها
+            </h1>
+        </a>
+
+        <a href="{% url "comment_manager" %}">
+            <h1>
+                مدیریت نظر ها
+            </h1>
+        </a>
+
+
+        <a href="{% url "message_manager" %}">
+            <h1>
+                مدیریت پیام ها
+            </h1>
+        </a>
+
+        <a href="{% url "slider_manager" %}">
+            <h1>
+                مدیریت اسلایدها
+            </h1>
+        </a>
+
+        <a href="{% url "home_exp_manager" %}">
+            <h1>
+                مدیریت تجربه های صفحه اول
+            </h1>
+        </a>
+
+        <a href="{% url "home_pack_manager" %}">
+            <h1>
+                مدیریت بسته های پشتیبان صفحه اول
+            </h1>
+        </a>
+
+    {% endif %}
+
+{% endblock %}

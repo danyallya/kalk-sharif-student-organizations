@@ -1,0 +1,151 @@
+{% load account_template_tags %}
+{% load date_template_tags %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}کالک | {% get_current_menu_name menus %}{% endblock %}</title>
+    <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+    {#    <link rel="shortcut icon" href="/static/favicon.ico">#}
+
+    {% block CSS %}
+        <link rel="stylesheet" type="text/css" href="/static/base.css?v=0.2.4"/>
+        <link rel="stylesheet" type="text/css" href="/static/old_base.css?v=0.1.2"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/jquery-ui/jquery-ui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/alertify/alertify.core.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/alertify/alertify.default.css">
+        <link rel="stylesheet" type="text/css" href="/static/lib/select2/select2.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/lib/select2/select2-override.css"/>
+    {% endblock %}
+
+    {% block JS %}
+        <script type="text/javascript" src="/static/lib/jquery-1.10.2.min.js"></script>
+        <script>
+            var django = {jQuery: jQuery};
+            var help = {{ help|safe }};
+        </script>
+        <script type="text/javascript" src="/static/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/static/lib/jquery.ui.datepicker-cc.all.min.js"></script>
+        <script type="text/javascript" src="/static/lib/alertify/alertify.min.js"></script>
+        <script src="/static/lib/jquery.stickysectionheaders.js"></script>
+
+        <script type="text/javascript" src="/static/base.js?v=0.1.11"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.datepicker-cc.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/calendar.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.datepicker-cc-ar.js"></script>
+        <script type="text/javascript" src="/static/datepicker/scripts/jquery.ui.datepicker-cc-fa.js"></script>
+        <script type="text/javascript" src="/static/lib/select2/select2.min.js"></script>
+        <script type="text/javascript" src="/static/lib/select2/select2_locale_fa.js"></script>
+    {% endblock %}
+
+</head>
+
+<body class="main_container">
+
+<div id="header">
+    <style>
+        #user-bar .link {
+            position: absolute;
+            top: 0;
+            right: 40px;
+            direction: rtl;
+            padding: 7px;
+        }
+    </style>
+    <div id="user-bar">
+        {% if user.is_authenticated %}
+            <a href="javascript:window.history.back();" title="بازگشت"><img id="logout"
+                                                                                   src="/static/images/page/logout.jpg"></a>
+
+            <a href="{% url "account_page" %}" class="link">
+                {{ user }}
+                خوش آمدید
+            </a>
+        {% else %}
+            <a href="{% url "login" %}?next={{ request.path }}" title="ورود"><img id="logout"
+                                                                                  src="/static/images/page/logout.jpg"></a>
+            <a href="{% url "signup" %}" class="link">
+                ثبت نام
+            </a>
+        {% endif %}
+    </div>
+
+
+    <div class="panel-part right-panel">
+        <a href="/"> <img id="logo" src="/static/images/logo.png"> </a>
+
+    </div>
+
+    <div class="panel-part center-panel">
+
+        <div id="help-cont" class="flex">
+            <div class="right" id="help-title">
+                راهنما:
+            </div>
+
+            <div class="right" id="help-bar">
+            </div>
+
+            <div class="right" id="close-help">
+                <img src="/static/images/page/close.jpg">
+            </div>
+        </div>
+
+        {% block roadmap %}
+
+        {% endblock %}
+
+    </div>
+
+
+    <div class="panel-part left-panel" id="header-page">
+        {% block header %}
+        {% endblock %}
+    </div>
+
+</div>
+
+{% include 'messages_alertify.html' %}
+
+<article id="content">
+    {% block content %}
+    {% endblock %}
+</article>
+
+<footer id="footer">
+
+    <div class="footer entezar" style="background-color: rgb(34, 34, 34); direction: ltr; clear: both;">
+        <div style="float: none">
+            <div style="margin-left: 60px; width: 300px; position: absolute; margin-top: 70px; height: 180px; line-height: normal">
+                <div><img src="/static/images/arm1.png" style="width: 250px;display: inline-block;">
+                </div>
+            </div>
+            <div style="color: white; float: right; direction: rtl; width: 450px; margin-bottom: 15px;margin-right: 30px; top: 0px; position: relative; margin-top: 30px;">
+                ارتباط با ما <br> <input type="text" placeholder="نام" class="input-footer input-footer-text"> <br>
+                <input
+                        type="text" placeholder="آدرس ایمیل" class="input-footer input-footer-text"> <br> <textarea
+                    rows="4"
+                    cols="40"
+                    class="input-footer"
+                    style=" width: 354px;"
+                    placeholder="پیام شما"></textarea> <br> <input type="submit" value="ارسال" class="input-footer"
+                                                                   style="width: 50px; margin-right: 220px;"></div>
+        </div>
+        <div class="clear"></div>
+        <hr style="text-align: center; width: 95%; margin-top: 15px; margin-left: 38px; border-top: 0 none !important;">
+        <div style="text-align: center; display: inline-block; width: 95%; color: window; direction: rtl"><img
+                src="/static/images/arm2.png"
+                style="margin-left: 5px; position: relative; top: -6px;"> <span
+                style="top: -12px; position: relative; "> کلیه حقوق مادی و معنوی سایت متعلق به <span
+                style="color: #ff0000"> قرارگاه شهید باقری </span> و <span style="color: #5a6baf"> کالک </span> می باشد. </span>
+            <img src="/static/images/arm.png" style="margin-right: 5px; width: 35px;"></div>
+    </div>
+
+    {% block footer %}
+    {% endblock %}
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load account_template_tags %}
+
+{% block  content %}
+
+    <div>
+        نتایج جستجو :
+        {{ q }}
+    </div>
+
+
+    {% for obj in experiences %}
+        <a class="box-item" href="{% url "experience_page" experience_id=obj.id %}">
+            <div class="box-logo">
+                <img src="/media/{{ obj.image }}">
+            </div>
+            <div class="box-info">
+                <span class="experience-title">
+                    {{ obj.title }}
+                </span>
+                <span class="box-date">
+                    {{ obj.date|pdate_if_date }}
+                </span>
+            </div>
+        </a>
+    {% endfor %}
+
+    {% for obj in documents %}
+        <a class="box-item" href="{% url "document_page" obj.id %}">
+            <div class="box-logo">
+                <img src="/media/{{ obj.image }}">
+            </div>
+            <div class="box-info">
+                <span class="experience-title">
+                    {{ obj.title }}
+                </span>
+                <span class="box-date">
+                    {{ obj.created_on|pdate_if_date }}
+                </span>
+            </div>
+        </a>
+    {% endfor %}
+
+    {% for obj in packages %}
+        <a class="box-item" href="{% url "package_page" obj.id %}">
+            <div class="box-logo">
+                <img src="{{ obj.pack_image }}">
+            </div>
+            <div class="box-info">
+                <span class="experience-title">
+                    {{ obj.title }}
+                </span>
+                <span class="box-date">
+                    {{ obj.created_on|pdate_if_date }}
+                </span>
+            </div>
+        </a>
+    {% endfor %}
+
+{% endblock %}
