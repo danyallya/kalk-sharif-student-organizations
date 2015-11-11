@@ -81,7 +81,7 @@ class Experience(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     )
 
     content = models.TextField(verbose_name="محتوا")
-    date = models.DateField(verbose_name="تاریخ تجربه", null=True)
+    date = models.DateField(verbose_name="تاریخ تجربه", null=True, blank=True)
     image = models.ImageField(verbose_name="تصویر", null=True, upload_to="experience_image/")
     image_cropping = ImageRatioField('image', '128x292', help_text="", verbose_name="محدوده کراپ برای لیست")
     service = models.IntegerField(verbose_name="سرویس", choices=SERVICES, null=True)

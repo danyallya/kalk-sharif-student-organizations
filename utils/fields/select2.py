@@ -5,7 +5,7 @@ from django.db.models.query_utils import Q
 from django.utils.encoding import force_text
 from django_select2.fields import AutoModelSelect2TagField, AutoModelSelect2Field
 from django_select2.views import NO_ERR_RESP
-from django_select2.widgets import AutoHeavySelect2Widget
+from django_select2.widgets import AutoHeavySelect2Widget, AutoHeavySelect2TagWidget
 from account.models import Organization, Role
 from experience.models import University, Tag
 from utils.models import Certifiable
@@ -195,9 +195,16 @@ class RoleChoiceField(TitledModelField):
     queryset = Role.objects
 
 
+class TitledMultipleModelWidget(AutoHeavySelect2TagWidget):
+    def init_options(self):
+        super(TitledMultipleModelWidget, self).init_options()
+        self.options['tokenSeparators'] = [","]
+
+
 class TagMultipleField(AutoModelSelect2TagField):
     queryset = Tag.objects
     search_fields = ['title__icontains', ]
+    widget = TitledMultipleModelWidget
 
     def get_model_field_values(self, value):
         return {'title': value}

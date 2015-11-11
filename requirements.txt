@@ -1,4 +1,4 @@
-django
+django>1.8
 django-easy-select2
 xlsxwriter
 simplejson
