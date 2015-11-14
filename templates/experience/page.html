@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load account_template_tags comments_tags %}
+{% load account_template_tags comments_tags thumbnail %}
 {% block JS %}
     <script>
         var sendCommentUrl = '{% url 'send_comment' content_type_id %}';
@@ -40,7 +40,7 @@
         </div>
     </a>
     <a class="absolute pointer head-left" href="">
-        <img class="right pointer head-img" src="/media/{{ experience.image }}" height="35">
+        <img class="right pointer head-img" src="{% thumbnail experience.image "35x35" %}" height="35">
 
         <div class="entezar pointer head-right-text right">
             {{ experience.title|max_str:11 }}
@@ -70,7 +70,7 @@
                 {{ experience.title }}
             </h1>
             <hr/>
-            <img class="experience-image full-width" src="/media/{{ experience.image }}" id="experience-image">
+            <img class="experience-image full-width" src="{% thumbnail experience.image "220x220" %}" id="experience-image">
 
         </div>
 
@@ -209,7 +209,7 @@
                     <a class="related-ex-row"
                        href="{% url 'experience_page' ex.id %}" target="_blank">
                         <div class="university-arm-div">
-                            <img class="university_arm" src="/media/{{ ex.university.image }}">
+                            <img class="university_arm" src="{% thumbnail ex.university.image "150x150" %}">
                         </div>
 
                         <div class="blue bold entezar ex-item">
@@ -241,7 +241,7 @@
 
     <div class="panel-part center-panel">
         <div class="content_title">
-            <img class="university-arm" src="/media/{{ experience.university.image }}">
+            <img class="university-arm" src="{% thumbnail experience.university.image "150x150" %}">
 
             <div class="experience_title_text entezar" id="experience-title">
                 {{ experience.university.title|default:experience.uni_temp }}

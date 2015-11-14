@@ -46,12 +46,6 @@ class University(BaseModel, Certifiable):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         super(University, self).save()
-        if self.image:
-            image = Image.open(self.image)
-            (width, height) = image.size
-            size = (150, int(150 * height / width))
-            image = image.resize(size, Image.ANTIALIAS)
-            image.save(self.image.path)
 
     @property
     def male_organizer(self):
@@ -174,14 +168,6 @@ class Experience(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         super(Experience, self).save()
-        try:
-            image = Image.open(self.image)
-            (width, height) = image.size
-            size = (220, int(220 * height / width))
-            image = image.resize(size, Image.ANTIALIAS)
-            image.save(self.image.path)
-        except:
-            pass
 
     def update(self):
         self.comment_count = ThreadedComment.objects.filter(content_type=ExperienceContentType,

@@ -10,7 +10,7 @@
             <a class="related-ex-row" style="margin-bottom: 31px;display: table; position: relative;"
                href="{% url 'experience_page' ex.id %}" target="_blank">
                 <div style="width: 30%; position: relative;float: right;">
-                    <img class="university_arm" src="/media/{{ ex.university.image }}" style="width: 100%">
+                    <img class="university_arm" src="{% thumbnail ex.university.image "150x150" %}" style="width: 100%">
                 </div>
                 <div style="width: 68%; position: relative;float: right;">
                     {{ ex.title }}

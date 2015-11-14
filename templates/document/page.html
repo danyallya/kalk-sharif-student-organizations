@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load account_template_tags comments_tags doc_template_tags %}
+{% load account_template_tags comments_tags doc_template_tags thumbnail %}
 {% block JS %}
     <script>
         var sendCommentUrl = '{% url 'send_comment' content_type_id %}';
@@ -129,7 +129,7 @@
             {% for ex in references %}
                 <a class="related-ex-row" href="{% url 'experience_page' ex.id %}" target="_blank">
                     <div class="university-arm-div">
-                        <img class="university-arm" src="/media/{{ ex.university.image }}">
+                        <img class="university-arm" src="{% thumbnail ex.university.image "150x150" %}">
                     </div>
 
                     <div class="blue bold entezar ex-item">
