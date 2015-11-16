@@ -266,6 +266,9 @@ class BackupPackage(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     def __convert_to_img__(self, width=0, height=0, format='gif'):
         ConvertPdfThread(self.pdf_file.name, width, height, format).start()
 
+    def tmp_update(self, width=0, height=0, format='gif'):
+        ConvertPdfThread(self.pdf_file.name, width, height, format).run()
+
 
 class PackageSubCat(BaseModel):
     CATEGORIES = (
