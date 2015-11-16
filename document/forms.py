@@ -177,6 +177,7 @@ class BackupPackageForm(BaseModelForm):
                 obj.confirm = True
 
         obj.save()
+        obj.pdf_update()
         return obj
 
 

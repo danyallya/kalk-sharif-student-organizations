@@ -1,4 +1,6 @@
 import os
+import string
+import random
 import threading
 
 from django.db import models
@@ -235,7 +237,19 @@ class BackupPackage(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
 
     def save(self, *args, **kwargs):
         super(BackupPackage, self).save(*args, **kwargs)
-        self.__convert_to_img__()
+
+    def rename(self):
+        old_path = self.pdf_file.path
+
+        print(old_path)
+        print(self.pdf_file.name)
+
+        new_name = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(17))
+        self.pdf_file.name = 'backup_package/' + new_name + '.pdf'
+
+        os.rename(old_path, self.pdf_file.path)
+
+        self.save()
 
     def update(self):
         rates = UserRate.objects.filter(
@@ -263,11 +277,15 @@ class BackupPackage(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     # def convert_to_jpg(self, width=0, height=0):
     #     self.__convert_to_img__(width, height, 'jpg')
 
+    def pdf_update(self):
+        try:
+            Image(filename=self.pdf_file.name, resolution=140)
+        except:
+            self.rename()
+            self.__convert_to_img__()
+
     def __convert_to_img__(self, width=0, height=0, format='gif'):
         ConvertPdfThread(self.pdf_file.name, width, height, format).start()
-
-    def tmp_update(self, width=0, height=0, format='gif'):
-        ConvertPdfThread(self.pdf_file.name, width, height, format).run()
 
 
 class PackageSubCat(BaseModel):
