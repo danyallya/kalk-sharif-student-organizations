@@ -241,9 +241,6 @@ class BackupPackage(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     def rename(self):
         old_path = self.pdf_file.path
 
-        print(old_path)
-        print(self.pdf_file.name)
-
         new_name = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(17))
         self.pdf_file.name = 'backup_package/' + new_name + '.pdf'
 

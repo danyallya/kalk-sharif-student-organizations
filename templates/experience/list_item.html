@@ -1,4 +1,4 @@
-{% load account_template_tags %}
+{% load account_template_tags thumbnail %}
 
 <div class="item right" data-id="{{ obj.id }}">
 
@@ -30,7 +30,7 @@
                         </span>
             </div>
         </div>
-        <img class="right" src="{{ obj.cropped_image }}" width="127" height="292">
+        <img class="right" src="{% thumbnail obj.image "128x292" crop %}" width="127" height="292">
     </a>
 
     <div class="main-item bbcnassim radius">

@@ -77,7 +77,7 @@ class Experience(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     content = models.TextField(verbose_name="محتوا")
     date = models.DateField(verbose_name="تاریخ تجربه", null=True, blank=True)
     image = models.ImageField(verbose_name="تصویر", null=True, upload_to="experience_image/")
-    image_cropping = ImageRatioField('image', '128x292', help_text="", verbose_name="محدوده کراپ برای لیست")
+    # image_cropping = ImageRatioField('image', '128x292', help_text="", verbose_name="محدوده کراپ برای لیست")
     service = models.IntegerField(verbose_name="سرویس", choices=SERVICES, null=True)
     gallery = models.ForeignKey(Gallery, verbose_name="گالری", null=True)
     university = models.ForeignKey(University, verbose_name="دانشگاه", null=True)
@@ -96,9 +96,9 @@ class Experience(BaseModel, PublishLeveled, Certifiable, VisitorTrack):
     def __str__(self):
         return "%s - %s" % (self.title, self.university.title)
 
-    @property
-    def cropped_image(self):
-        return cropped_thumbnail(None, self, "image_cropping")
+    # @property
+    # def cropped_image(self):
+    #     return cropped_thumbnail(None, self, "image_cropping")
 
     @property
     def content_brief(self):
