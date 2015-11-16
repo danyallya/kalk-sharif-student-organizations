@@ -122,7 +122,7 @@
             <hr/>
 
             <img class="experience-image full-width"
-                 src="{% if package.image %}/media/{{ package.image }}{% else %}/static/images/page/pdf_package.png{% endif %}" id="experience-image">
+                 src="{{ package.pack_image }}" id="experience-image">
 
         </div>
 
@@ -141,7 +141,7 @@
                     <a class="related-ex-row"
                        href="{% url "package_page" pack.id %}" target="_blank">
                         <div class="university-arm-div">
-                            <img class="university_arm" src="/media/{{ pack.image }}">
+                            <img class="university_arm" src="{{ package.pack_image }}">
                         </div>
 
                         <div class="blue bold entezar ex-item">

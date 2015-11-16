@@ -137,15 +137,15 @@ $(document).ready(function () {
         reStick();
 
     // SELECT2 UNIVERSITY
-    django_select2.s2_state_param_gen = function (term, page) {
-        var proxFunc = $.proxy(django_select2.get_url_params, this);
-        // no need for a custom func here.
-        var results = proxFunc(term, page, 'django_select2.process_results');
-        results.state = $("[id$='uni_state']").val();
-        results.uni_type = $("[id$='uni_type']").val();
-        return results;
-    };
-
+    if (typeof django_select2 != 'undefined')
+        django_select2.s2_state_param_gen = function (term, page) {
+            var proxFunc = $.proxy(django_select2.get_url_params, this);
+            // no need for a custom func here.
+            var results = proxFunc(term, page, 'django_select2.process_results');
+            results.state = $("[id$='uni_state']").val();
+            results.uni_type = $("[id$='uni_type']").val();
+            return results;
+        };
 
 });
 

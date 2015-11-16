@@ -7,7 +7,7 @@ from PyPDF2 import PdfFileReader
 from django.template.defaultfilters import striptags
 from image_cropping.templatetags.cropping import cropped_thumbnail
 
-# from wand.image import Image
+from wand.image import Image
 from colorful.fields import RGBColorField
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.aggregates import Sum
@@ -97,18 +97,31 @@ class Document(BaseModel, PublishLeveled, VisitorTrack):
 
     @property
     def service_icon(self):
+        base_url = settings.STATIC_URL + 'images/services/'
         if self.service == 1:
-            return settings.STATIC_URL + 'images/media-h.png'
+            return base_url + "shohada.png"
         elif self.service == 2:
-            return settings.STATIC_URL + 'images/teachers-h.png'
+            return base_url + "jahaneeslam.png"
         elif self.service == 3:
-            return settings.STATIC_URL + 'images/location-h.png'
+            return base_url + "ordooyi.png"
         elif self.service == 4:
-            return settings.STATIC_URL + 'images/lib.png'
+            return base_url + "roshd.png"
         elif self.service == 5:
-            return settings.STATIC_URL + 'images/header-fun-h.png'
+            return base_url + "elmi.png"
         elif self.service == 6:
-            return settings.STATIC_URL + 'images/rule-h.png'
+            return base_url + "tashkilati.png"
+        elif self.service == 7:
+            return base_url + "jazb.png"
+        elif self.service == 8:
+            return base_url + "naghshafarini.png"
+        elif self.service == 9:
+            return base_url + "resaneh.png"
+        elif self.service == 10:
+            return base_url + "azadfekri.png"
+        elif self.service == 11:
+            return base_url + "jahadi.png"
+        elif self.service == 12:
+            return base_url + "masjed.png"
 
     def update(self):
         self.comment_count = ThreadedComment.objects.filter(content_type=DocumentContentType, object_pk=self.id).count()
@@ -310,13 +323,13 @@ class ConvertPdfThread(threading.Thread):
         if not os.path.isdir(output_dir):
             os.mkdir(output_dir)
 
-            # input_file = PdfFileReader(open(filepath, 'rb'))
-            # for i in range(input_file.getNumPages()):
-            #     with Image(filename=filepath + '[' + str(i) + ']', resolution=140) as img:
-            #         if len(size) > 0:
-            #             img.resize(self.width, self.height)
-            #         img.format = self.format
-            #         img.save(filename=output_dir + str(i) + '.' + self.format)
+            input_file = PdfFileReader(open(filepath, 'rb'))
+            for i in range(input_file.getNumPages()):
+                with Image(filename=filepath + '[' + str(i) + ']', resolution=140) as img:
+                    if len(size) > 0:
+                        img.resize(self.width, self.height)
+                    img.format = self.format
+                    img.save(filename=output_dir + str(i) + '.' + self.format)
 
 
 try:
