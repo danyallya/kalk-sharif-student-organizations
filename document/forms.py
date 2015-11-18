@@ -151,11 +151,13 @@ class BackupPackageForm(BaseModelForm):
         if 'document' in self.fields:
             self.fields['document'] = DocumentChoiceField(required=False, label="سند مربوطه")
 
-        if (self.http_request.user.level < Account.ORGANIZER_LEVEL or not self.instance.id) \
+        if hasattr(self, 'http_request') and (
+                        self.http_request.user.level < Account.ORGANIZER_LEVEL or not self.instance.id) \
                 and 'confirm' in self.fields:
             del self.fields['confirm']
 
-        if self.http_request.user.level < Account.ACTIVE_LEVEL and 'publish_type' in self.fields:
+        if hasattr(self,
+                   'http_request') and self.http_request.user.level < Account.ACTIVE_LEVEL and 'publish_type' in self.fields:
             del self.fields['publish_type']
 
         self.fields['cat'].queryset = PackageSubCat.objects.filter().order_by('title')
@@ -173,7 +175,7 @@ class BackupPackageForm(BaseModelForm):
         obj = super(BackupPackageForm, self).save()
 
         if is_new:
-            if PermissionController.is_active_user(self.http_request.user):
+            if hasattr(self, 'http_request') and PermissionController.is_active_user(self.http_request.user):
                 obj.confirm = True
 
         obj.save()
@@ -182,7 +184,8 @@ class BackupPackageForm(BaseModelForm):
 
 
 BackupPackageFormset = inlineformset_factory(Document, BackupPackage, form=BackupPackageForm,
-                                             exclude=('document', 'receive_count', 'rate', 'tags', 'image'),
+                                             exclude=(
+                                                 'document', 'receive_count', 'rate', 'tags', 'image', 'visitor_count'),
                                              extra=1, can_delete=True)
 
 
