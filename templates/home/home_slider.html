@@ -1,0 +1,28 @@
+<div class="mrg-center slider relative">
+    <img src="" id="slide-image">
+
+    <a class="absolute slider-text">
+        <div class="white BYekan" id="slide-title">
+        </div>
+        {#            <div class="white BYekan">#}
+        {#                نقش آفرینی مردمی#}
+        {#            </div>#}
+        <p class="white BYekan" id="slide-text">
+        </p>
+    </a>
+
+    <div class="slider-images absolute">
+        <div class="right right-arrow">
+            <div></div>
+        </div>
+        <div class="right slider-image">
+            {% for slide in slides %}
+                <img id="slide-image-{{ forloop.counter0 }}" class="img-slider image" src="{{ slide.slide_image }}"
+                     data-title="{{ slide.title }}" data-text="{{ slide.text }}" data-link="{{ slide.link }}">
+            {% endfor %}
+        </div>
+        <div class="left left-arrow">
+            <div></div>
+        </div>
+    </div>
+</div>

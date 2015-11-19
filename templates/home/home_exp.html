@@ -1,0 +1,165 @@
+{% load account_template_tags date_template_tags thumbnail %}
+<div class="mrg-center exp">
+        <div class="right exp-right">
+            <a href="{% url 'experiences_list' %}">
+                <h2 class="darkblue exp-right-header entezar">
+                    تجربیات دانشگاه ها
+                </h2>
+            </a>
+            {% if main_exp %}
+                <a href="{% url 'experience_page' main_exp.id %}" class="right exp-right-rpart">
+                    <div class="relative exp-rpart-img">
+                        <img src="{% thumbnail main_exp.image 318x201 crop %}" width="318" height="201">
+
+                        <div class="absolute logo-rpart"></div>
+                    </div>
+                    <h4 class="bbcnassim">
+                        {{ main_exp.title }}
+                    </h4>
+
+                    <p class="bbcnassim">
+                        {{ main_exp.content_brief }}
+                    </p>
+
+                    <div class="left right-part-text">
+                    <span class="left darkblue min-rmargin">
+                        {{ main_exp.university.title }}
+                    </span>
+                        <img class="left min-rmargin" src="{% thumbnail main_exp.university.image 18x18 crop %}"
+                             width="18" height="18">
+
+                    </div>
+                    <div class="left right-part-text">
+                    <span class="left darkblue min-rmargin">
+                        {{ main_exp.date|pdate_year_month_day }}
+                    </span>
+                        <img class="left" src="/static/images/calu.png">
+                    </div>
+                </a>
+            {% endif %}
+            <div class="right exp-right-lpart">
+                {% for exp in extra_exp %}
+                    <a class="box-item" href="{% url 'experience_page' exp.id %}">
+                        <div class="right">
+                            <div class="relative exp-lpart-img">
+                                <img src="{% thumbnail exp.image 105x71 crop %}" width="105" height="71">
+
+                                <div class="absolute logo-lpart"></div>
+                            </div>
+                        </div>
+                        <div class="right relative box-item-left">
+                            <div>
+                                <h4 class="mrg-center  min-rmargin">
+                                    {{ exp.title }}
+                                </h4>
+                            </div>
+
+                            <div class="absolute box-item-uni">
+                            <span class="left darkblue min-rmargin">
+                                {{ exp.university.title }}
+                            </span>
+                                <img class="left min-rmargin" src="{% thumbnail exp.university.image 18x18 crop %}"
+                                     width="18" height="18">
+
+                            </div>
+                            <div class="absolute box-item-time">
+                                <span class="left darkblue min-rmargin">
+                                   {{ exp.date|pdate_year_month_day }}
+                                </span>
+                                <img class="left" src="/static/images/calu.png">
+                            </div>
+
+                        </div>
+
+                    </a>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="right exp-left relative">
+
+            <div class="bg-darkblue exp-left-header">
+                <div class="white">
+                    نمایش فیلتری تجربیات
+                </div>
+            </div>
+
+            <form class="exp-choose absolute" action="{% url "experiences_list" %}" method="get" target="_blank"
+                  autocomplete="off">
+
+                <select class="choose-item uni-filter" name="uni">
+                    <option value="" selected>
+                        دانشگاه مورد نظر را انتخاب کنید
+                    </option>
+
+                    {% for obj in uni_list %}
+                        <option value="{{ obj.id }}">
+                            {{ obj.title }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+
+                <select class="choose-item service-filter" name="s">
+                    <option value="" selected>
+                        انتخاب سرویس
+                    </option>
+                    {% for id, service in services %}
+                        <option name="service" value="{{ id }}">{{ service }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="choose-item year-filter" name="y">
+                    <option value="" selected>
+                        تاریخ
+                    </option>
+                    {% for year in 20|get_years %}
+                        <option name="service" value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+
+
+                <input class="choose-item tag-filter" id="tag-search" name="tn"
+                       placeholder="انتخاب برچسب مورد نظر" onfocus="this.placeholder = ''"
+                       onblur="this.placeholder ='انتخاب برچسب مورد نظر'">
+                <input type="hidden" name="t" id="tag-id">
+
+                <ul id="tag-res" class="absolute">
+
+                </ul>
+
+            </form>
+
+            <div class="exp-left-item">
+                <div class="right tab-link left-item-menu active" data-tab="last-exp">
+                    تازه ترین تجربیات
+                </div>
+                <div class="right tab-link left-item-menu" data-tab="fav-exp">
+                    پربازدید ترین تجربیات
+                </div>
+                <div class="right tab-link left-item-menu" data-tab="popular-exp">
+                    پرامتیاز ترین تجربیات
+                </div>
+
+            </div>
+
+            <div class="tab active" id="last-exp">
+                {% for exp in last_exp %}
+                    {% include 'home/exp_home_list_item.html' with exp=exp %}
+                {% endfor %}
+            </div>
+
+            <div class="tab" id="fav-exp">
+                {% for exp in visited_exp %}
+                    {% include 'home/exp_home_list_item.html' with exp=exp %}
+                {% endfor %}
+            </div>
+            <div class="tab" id="popular-exp">
+                {% for exp in rated_exp %}
+                    {% include 'home/exp_home_list_item.html' with exp=exp %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>

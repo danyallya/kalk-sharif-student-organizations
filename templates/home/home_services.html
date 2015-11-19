@@ -1,0 +1,14 @@
+<div class="mrg-center services">
+
+    {% for id, service in services %}
+        <a class="right card-container no-hover-link" href="{% url 'documents_list' %}?s={{ id }}">
+            <div class="right card relative" id="servic{{ id }}">
+                <div class="absolute servic front face"></div>
+                <div class="absolute back face center bbcnassim bold{% if id == 3 or id == 9 or id == 10 or id == 11 %} padded{% endif %}">
+
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+
+</div>

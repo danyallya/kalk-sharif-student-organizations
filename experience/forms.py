@@ -24,7 +24,7 @@ class ExperienceForm(BaseModelForm):
         model = Experience
         exclude = ('gallery', 'attachments', 'image_cropping', 'uni_temp', 'creator_old', 'visitor_count',
                    'comment_count', 'rate')
-        fields = ('title', 'publish_type', 'image', 'date', 'service', 'content', 'uni_state', 'uni_type', 'university',
+        fields = ('title', 'publish_type', 'confirm', 'image', 'date', 'service', 'content', 'uni_state', 'uni_type', 'university',
                   'organization', 'tags')
 
     uni_state = forms.ModelChoiceField(queryset=Place.objects.all(), label="استان")

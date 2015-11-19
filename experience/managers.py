@@ -17,6 +17,12 @@ UniversityForm = create_model_form(University)
 OrganizationForm = create_model_form(Organization)
 
 
+def confirm_obj(http_request, selected_instances):
+    for p in selected_instances:
+        p.confirm = True
+        p.save()
+
+
 class ExperienceManager(ObjectsManager):
     manager_name = u"experience_manager"
     manager_verbose_name = "تجربه ها"
@@ -26,6 +32,8 @@ class ExperienceManager(ObjectsManager):
         EditExperience(),
         ShowAction(ExperienceForm, height='350'),
         DeleteAction(),
+        DoAction(do_function=confirm_obj, action_name='confirm', action_verbose_name="تایید",
+                 confirm_message="آیا از تایید موارد انتخاب شده اطمینان دارید؟")
     ]
 
     def get_all_data(self):
@@ -66,12 +74,6 @@ class ExperienceManager(ObjectsManager):
             ManagerColumn('last_change', u"تاریخ ویرایش", 6),
         ]
         return columns
-
-
-def confirm_obj(http_request, selected_instances):
-    for p in selected_instances:
-        p.confirm = True
-        p.save()
 
 
 class TagManager(ObjectsManager):

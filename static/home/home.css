@@ -527,6 +527,8 @@ input.choose-item:-ms-input-placeholder {
     margin-top: 34px;
     width: 150px;
     height: 20px;
+    bottom: 0;
+    left: 0;
 }
 
 /*backup*/
@@ -680,6 +682,39 @@ input.choose-item:-ms-input-placeholder {
 
 .backup-item-left {
     width: 203px;
+}
+
+/*TV*/
+.tv {
+    width: 990px;
+    height: 500px;
+    border-bottom: 3px solid #0b893e;
+    text-align: right;
+}
+
+.tv-blue {
+    color: #224f7b;
+}
+
+.tv-right-rpart {
+    width: 610px;
+    height: 260px;
+}
+
+.tv-rpart-img {
+    width: 400px;
+    height: 260px;
+}
+
+/*SCHOOL*/
+.school {
+    width: 990px;
+    height: 500px;
+    text-align: right;
+}
+
+.school-green {
+    color: #0b893e;
 }
 
 /**/

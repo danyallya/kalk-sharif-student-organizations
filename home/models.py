@@ -47,7 +47,7 @@ class HomeTV(BaseModel):
         (2, "ویدیو سمت چپ"),
         (3, "اسلایدر ویدیو"),
     )
-    page_place = models.IntegerField(verbose_name="مکان در صفحه", null=True, blank=True)
+    page_place = models.IntegerField(verbose_name="مکان در صفحه", null=True, blank=True, choices=PLACE_CHOICES)
 
     class Meta:
         verbose_name = "کالک TV صفحه اول"

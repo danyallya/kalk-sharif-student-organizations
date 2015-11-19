@@ -10,18 +10,17 @@ def home(request):
 
     experiences = Experience.objects.filter(
         id__in=HomeExp.objects.all().select_related('experience').values_list('experience', flat=True))
+
     if experiences:
         main_exp = experiences[0]
         extra_exp = experiences[1:5]
-        last_exp = Experience.get_last_experiences()
-        visited_exp = Experience.get_visited_experiences()
-        rated_exp = Experience.get_rated_experiences()
     else:
         main_exp = None
         extra_exp = []
-        last_exp = []
-        visited_exp = []
-        rated_exp = []
+
+    last_exp = Experience.get_last_experiences()
+    visited_exp = Experience.get_visited_experiences()
+    rated_exp = Experience.get_rated_experiences()
 
     packages = BackupPackage.objects.filter(
         id__in=HomePackage.objects.all().select_related('package').values_list('package', flat=True))

@@ -1,5 +1,5 @@
 {% load account_template_tags date_template_tags thumbnail %}
-<a class="exp-litem" href="{% url 'experience_page' exp.id %}">
+<a class="exp-litem relative" href="{% url 'experience_page' exp.id %}">
     <div class="right exp-litem-logo mrg-center">
         <img src="{% thumbnail exp.university.image 57x57 crop %}" width="57" height="57">
     </div>
@@ -15,10 +15,9 @@
         </div>
 
     </div>
-    <div class="left">
-        <div class=" box-litem-time">
-            <span class="left darkblue min-rmargin">{{ exp.date|pdate_year_month_day }}</span>
-            <img class="left" src="/static/images/calu.png">
-        </div>
+
+    <div class=" box-litem-time absolute">
+        <span class="left darkblue min-rmargin">{{ exp.date|pdate_year_month_day }}</span>
+        <img class="left" src="/static/images/calu.png">
     </div>
 </a>
