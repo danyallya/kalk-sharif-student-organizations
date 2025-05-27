@@ -696,9 +696,115 @@ input.choose-item:-ms-input-placeholder {
     color: #224f7b;
 }
 
+.tv-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
+
+}
+
+.tv-main {
+    width: 100%;
+    height: 260px;
+}
+
+.tv-item-info {
+    width: 185px;
+    height: 260px;
+    overflow: hidden;
+    margin-left: 28px;
+
+}
+
+.tv-list {
+    width: 355px;
+    overflow: hidden;
+}
+
+.tv-list-item {
+    width: 100%;
+    height: 75px;
+    margin-bottom: 17px;
+}
+
+.tv-list-item .tv-item {
+    width: 100px;
+    height: 75px;
+    border-bottom: 5px solid #224f7b;
+    overflow: hidden;
+
+}
+
+.tv-list-item .tv-item .item-icon {
+    width: 27px;
+    height: 24px;
+    background-size: 27px 24px;
+
+}
+
+.list-items {
+    left: 0;
+}
+
+.list-items .box-litem-time {
+    margin-top: 11px;
+    width: 100px;
+}
+
+.list-items .box-ritem-time {
+    margin-top: 11px;
+}
+
+.tv-item {
+    width: 400px;
+    height: 260px;
+    border-bottom: 3px solid #224f7b;
+    overflow: hidden;
+    margin-left: 11px;
+}
+
+.info-title {
+    line-height: 20px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.tv-item-info .box-litem-time {
+    width: 90px;
+    right: 0;
+}
+
+.tv-item-info .box-ritem-time {
+    width: 90px;
+    left: 0;
+    margin-top: 34px;
+    width: 150px;
+    height: 20px;
+    bottom: 0;
+}
+
+.date-item {
+    font-family: 'MjTunisia', tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.info-text {
+    text-align: justify;
+    font-size: 11px;
+
+}
+
 .tv-right-rpart {
     width: 610px;
     height: 260px;
+}
+
+.item-icon {
+    background-image: url("/static/images/tv-icon.jpg");
+    width: 51px;
+    height: 51px;
+    bottom: 0;
 }
 
 .tv-rpart-img {
@@ -706,10 +812,66 @@ input.choose-item:-ms-input-placeholder {
     height: 260px;
 }
 
+.tv-slider {
+    width: 100%;
+    height: 110px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+    margin-top: 30px;
+    white-space: nowrap;
+}
+
+.tv-slider .tv-item {
+    width: 190px;
+    height: 110px;
+    border-bottom: 4px solid #224f7b;
+    overflow: hidden;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tv-slider .tv-item .item-icon {
+    width: 35px;
+    height: 31px;
+    background-size: 35px 31px;
+
+}
+
+.tv-left-arrow {
+    background-image: url("/static/images/tv-arrow.jpg");
+    width: 37px;
+    height: 53px;
+    left: -12px;
+    bottom: 66px;
+
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    filter: "FlipH";
+    -ms-filter: "FlipH";
+    z-index: 5555;
+    cursor: pointer;
+}
+
+.tv-right-arrow {
+    background-image: url("/static/images/tv-arrow.jpg");
+    width: 37px;
+    height: 53px;
+    bottom: 66px;
+    z-index: 5555;
+    cursor: pointer;
+
+    right: -19px;
+}
+
 /*SCHOOL*/
 .school {
     width: 990px;
-    height: 500px;
+
     text-align: right;
 }
 
@@ -717,10 +879,140 @@ input.choose-item:-ms-input-placeholder {
     color: #0b893e;
 }
 
-/**/
 .right-part-text {
 
     font-size: 12px;
     font-weight: bold;
 
+}
+
+.contact-us {
+    color: #3b3b3b;
+    font-family: BTitrBd;
+    margin-top: 26px;
+    font-size: 14px;
+}
+
+.school-item {
+    width: 300px;
+    height: 150px;
+    margin-left: 14px;
+    margin-top: 10px;
+
+}
+
+.school-items {
+    width: 100%;
+    height: 152px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-top: 13px;
+}
+
+.school-title {
+    background-image: url("/static/images/school-title.png");
+    width: 30px;
+    height: 137px;
+    margin-left: 18px;
+    margin-top: 14px;
+
+}
+
+.school-most-title {
+    background-image: url("/static/images/school-most-title.png");
+    width: 36px;
+    height: 153px;
+    margin-top: 5px;
+    background-size: 36px 146px;
+    margin-left: 12px;
+}
+
+.ritem-header {
+    color: white;
+    font-family: 'MjTunisia', tahoma, sans-serif;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.cate-img {
+    background-image: url("/static/images/servis-img.png");
+    width: 28px;
+    height: 34px;
+}
+
+.cate-text {
+    color: white;
+    font-size: 17px;
+    margin-left: 4px;
+}
+
+.ritem-cate {
+    margin-top: 29px;
+    margin-left: 13px;
+}
+
+.school-ritem {
+    width: 150px;
+    height: 150px;
+    background-color: #04836c;
+    right: 0;
+}
+
+.school-citem {
+    width: 150px;
+    height: 150px;
+    background-color: #03997e;
+    right: 0;
+}
+
+.school-item:hover .school-citem {
+    right: 150px;
+}
+
+.school-litem {
+    background-image: url("/static/images/school-img.png");
+    width: 150px;
+    height: 150px;
+    left: 0;
+}
+
+.school-footer {
+    margin-top: 50px;
+    border-top: 3px solid #0d8771;
+    height: 47px;
+    border-bottom: 3px solid #0d8771;
+    width: 100%;
+}
+
+.footer-item {
+    height: 100%;
+    background-color: #03997e;
+    width: 155px;
+    color: white;
+    text-align: right;
+    font-family: 'MjTunisia', tahoma, sans-serif;
+    padding-top: 6px;
+    padding-right: 6px;
+    font-weight: bold;
+
+}
+
+.footer-item-img {
+    background-image: url("/static/images/school-footer.png");
+    width: 18px;
+    height: 17px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.footer-items {
+    width: 340px;
+    height: 100%;
+    color: black;
+    font-weight: bold;
+    padding-top: 6px;
+    padding-right: 10px;
+    font-family: 'MjTunisia', tahoma, sans-serif;
 }

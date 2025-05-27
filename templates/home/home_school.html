@@ -2,89 +2,200 @@
 
 <div class="mrg-center school relative">
 
-    <div class="right exp-right">
+    <div class="right ">
         <a href="{% url "package_list" %}">
             <h2 class="school-green exp-right-header entezar">
                 مدرسه کالک
             </h2>
         </a>
 
-        {% if main_pack %}
-            <a href="{% url 'package_page' main_pack.id %}" class="right exp-right-rpart">
-                <div class="border-darkred relative exp-rpart-img">
 
-                    <img src="{% if main_pack.image %}{% thumbnail main_pack.image 318x201 crop %}{% else %}{{ main_pack.default_image }}{% endif %}"
-                         width="318" height="201">
+    </div>
+    <div class="left contact-us">
+        تماس با مدرسه
+    </div>
 
-                    <div class="absolute logo-rpart logo-pack"></div>
+
+    <div class="school-items">
+        <div class="school-title right"></div>
+        <div class="school-item right relative">
+            <div class="school-ritem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
                 </div>
-                <h4 class="bbcnassim">
-                    {{ main_pack.title }}
-                </h4>
-
-                <p class="bbcnassim">
-                    {#{{ main_pack. }}#}
-                </p>
-
-                {% if main_pack.document %}
-                    <div class="left right-part-text">
-                            <span class="left darkblue min-rmargin">
-                                {{ main_pack.document.university.title }}
-                            </span>
-                        <img class="left min-rmargin"
-                             src="{% thumbnail main_pack.document.university.image 18x18 crop %}" width="18"
-                             height="18">
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
                     </div>
-                {% endif %}
-                <div class="left right-part-text">
-                    <span class="left darkblue min-rmargin">
-                       {{ main_pack.created_on|pdate_year_month_day }}
-                    </span>
-                    <img class="left" src="/static/images/calu.png">
                 </div>
-            </a>
-        {% endif %}
-        <div class="right exp-right-lpart">
-            {% for pack in extra_pack %}
-                <a class="box-item" href="{% url 'package_page' pack.id %}">
-                    <div class="right">
-                        <div class="border-darkred relative exp-lpart-img ">
-                            <img src="
-                                    {% if pack.image %}{% thumbnail pack.image 105x71 crop %}{% else %}{{ pack.default_image }}{% endif %}"
-                                 width="105" height="71">
-
-                            <div class="absolute logo-lpart logo-pack"></div>
-                        </div>
+            </div>
+            <div class="school-litem absolute"></div>
+            <div class="school-citem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
                     </div>
-                    <div class=" right relative box-item-left">
-                        <div>
-                            <h4 class="mrg-center  min-rmargin">
-                                {{ pack.title }}
-                            </h4>
-                        </div>
+                </div>
+            </div>
 
-                        {% if pack.document %}
-                            <div class="absolute box-item-uni">
-                                    <span class="left darkblue min-rmargin">
-                                        {{ pack.document.university.title }}
-                                    </span>
-                                <img class="left min-rmargin"
-                                     src="{% thumbnail pack.document.university.image 18x18 crop %}"
-                                     width="18" height="18">
-                            </div>
-                        {% endif %}
-
-                        <div class="absolute box-item-time">
-                            <span class="left darkblue min-rmargin">
-                                      {{ pack.created_on|pdate_year_month_day }}
-                            </span>
-                            <img class="left" src="/static/images/calu.png">
-                        </div>
-
+        </div>
+        <div class="school-item right relative">
+            <div class="school-ritem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
                     </div>
+                </div>
+            </div>
+            <div class="school-litem absolute"></div>
+            <div class="school-citem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
 
-                </a>
-            {% endfor %}
+        </div>
+        <div class="school-item right relative">
+            <div class="school-ritem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+            <div class="school-litem absolute"></div>
+            <div class="school-citem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="school-items">
+        <div class="school-most-title right"></div>
+        <div class="school-item right relative">
+            <div class="school-ritem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+            <div class="school-litem absolute"></div>
+            <div class="school-citem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="school-item right relative">
+            <div class="school-ritem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+            <div class="school-litem absolute"></div>
+            <div class="school-citem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="school-item right relative">
+            <div class="school-ritem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+            <div class="school-litem absolute"></div>
+            <div class="school-citem absolute">
+                <div class="ritem-header">
+                    کارگاه «صفر تا صد اردو جهادی»
+                </div>
+                <div class="ritem-cate">
+                    <div class="cate-img left"></div>
+                    <div class="cate-text left">
+                        اقتصاد مقاومتی
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="school-footer">
+        <div class="footer-item right">
+            <div class="right">
+                دوره های برگزار شده
+            </div>
+            <div class="footer-item-img right"></div>
+        </div>
+        <div class="footer-items right">
+            ..خط امام استان فارس- اصول کارتشکیلاتی- شهریور...
+        </div>
+        <div class="footer-item right">
+            <div class="right">
+                دوره های برگزار شده
+            </div>
+            <div class="footer-item-img right"></div>
+        </div>
+        <div class="footer-items right">
+            ..خط امام استان فارس- اصول کارتشکیلاتی- شهریور...
         </div>
     </div>
 

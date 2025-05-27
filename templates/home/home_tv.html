@@ -2,91 +2,125 @@
 
 <div class="mrg-center tv relative">
 
-    <div class="right exp-right">
+    <div class="tv-blue entezar tv-title">
+        کالک TV
+    </div>
+    <div class="tv-main">
+        <div class="relative right tv-item">
+            <img src="/static/images/tv-img.jpg" width="400px" height="257px">
 
-        <a href="javascript:void(0)">
-            <h2 class="tv-blue exp-right-header entezar">
-                کالک tv
-            </h2>
-        </a>
+            <div class="absolute item-icon"></div>
+        </div>
+        <div class="right relative tv-item-info">
+            <div class="info-title mjtunisia">
+                مناظره ی فلانی و بهمانی در دانشگاه تهران و حواشی آن
 
-        <a href="" class="right tv-right-rpart">
-            <div class="border-darkred relative tv-rpart-img">
-
-                <img src="{% if main_pack.image %}{% thumbnail main_pack.image 400x260 crop %}{% else %}{{ main_pack.default_image }}{% endif %}"
-                     width="400" height="260">
-
-                <div class="absolute logo-rpart logo-pack"></div>
             </div>
-
-            <h4 class="bbcnassim">
-                {{ main_pack.title }}
-            </h4>
-
-            <p class="bbcnassim">
-                {#{{ main_pack. }}#}
-            </p>
-
-            <div class="left right-part-text">
-                            <span class="left darkblue min-rmargin">
-                                {{ main_pack.document.university.title }}
-                            </span>
-                <img class="left min-rmargin"
-                     src="{% thumbnail main_pack.document.university.image 18x18 crop %}" width="18"
-                     height="18">
+            <div class="bbcnassim info-text">
+                کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانی در دانشگاه تهران که به جنجال کشیده شد. کلیپ حواشی برنامه ی
+                مناظره ی فلانی و بهمانی در دانشگاه تهران که به جنجال کشیده شد. کلیپ حواشی برنامه ی مناظره ی فلانی و
+                بهمانی در دانشگاه تهران که به جنجال کشیده شد. کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانی در دانشگاه
+                تهران که به جنجال کشیده شد. کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانی در دانشگاه تهران که به جنجال
+                کشیده شد. کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانی در دانشگاه تهران که به جنجال کشیده شد.
             </div>
-
-            <div class="left right-part-text">
-                    <span class="left darkblue min-rmargin">
-                       {{ main_pack.created_on|pdate_year_month_day }}
-                    </span>
+            <div class=" box-litem-time absolute">
+                <span class="left darkblue date-item min-rmargin">02 آبان 1394</span>
                 <img class="left" src="/static/images/calu.png">
             </div>
-        </a>
+            <div class=" box-ritem-time absolute">
+                <span class="left darkblue date-item min-rmargin">دانشگاه تهران  </span>
+                <img class="left" src="/static/images/uni-logo.png">
+            </div>
+            <div></div>
+        </div>
+        <div class="right tv-list">
+            <div class="tv-list-item">
+                <div class="relative right tv-item">
+                    <img src="/static/images/tv-img.jpg" width="100px" height="75px">
 
-        <div class="right exp-right-lpart">
-            {% for pack in extra_pack %}
-                <a class="box-item" href="{% url 'package_page' pack.id %}">
-                    <div class="right">
-                        <div class="border-darkred relative exp-lpart-img ">
-                            <img src="
+                    <div class="absolute item-icon"></div>
+                </div>
+                <div class="info-title mjtunisia">
+                    ی و بهمانی در تهران و حواشی آن
 
-                                    {% if pack.image %}{% thumbnail pack.image 105x71 crop %}{% else %}{{ pack.default_image }}{% endif %}"
-                                 width="105" height="71">
+                </div>
+                <div class="bbcnassim info-text">
+                    کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانیاشی برنامه ی
 
-                            <div class="absolute logo-lpart logo-pack"></div>
-                        </div>
+                </div>
+                <div class="absolute list-items">
+                    <div class=" box-litem-time left">
+                        <span class="left darkblue date-item min-rmargin">02 آبان 1394</span>
+                        <img class="left" src="/static/images/calu.png">
                     </div>
-                    <div class=" right relative box-item-left">
-                        <div>
-                            <h4 class="mrg-center  min-rmargin">
-                                {{ pack.title }}
-                            </h4>
-                        </div>
-
-                        {% if pack.document %}
-                            <div class="absolute box-item-uni">
-                                    <span class="left darkblue min-rmargin">
-                                        {{ pack.document.university.title }}
-                                    </span>
-                                <img class="left min-rmargin"
-                                     src="{% thumbnail pack.document.university.image 18x18 crop %}"
-                                     width="18" height="18">
-                            </div>
-                        {% endif %}
-
-                        <div class="absolute box-item-time">
-                            <span class="left darkblue min-rmargin">
-                                      {{ pack.created_on|pdate_year_month_day }}
-                            </span>
-                            <img class="left" src="/static/images/calu.png">
-                        </div>
-
+                    <div class=" box-ritem-time left">
+                        <span class="left darkblue date-item min-rmargin">دانشگاه تهران  </span>
+                        <img class="left" src="/static/images/uni-logo.png">
                     </div>
+                </div>
+            </div>
+            <div class="tv-list-item">
+                <div class="relative right tv-item">
+                    <img src="/static/images/tv-img.jpg" width="100px" height="75px">
 
-                </a>
-            {% endfor %}
+                    <div class="absolute item-icon"></div>
+                </div>
+                <div class="info-title mjtunisia">
+                    ی و بهمانی در تهران و حواشی آن
+
+                </div>
+                <div class="bbcnassim info-text">
+                    کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانیاشی برنامه ی
+
+                </div>
+                <div class="absolute list-items">
+                    <div class=" box-litem-time left">
+                        <span class="left darkblue date-item min-rmargin">02 آبان 1394</span>
+                        <img class="left" src="/static/images/calu.png">
+                    </div>
+                    <div class=" box-ritem-time left">
+                        <span class="left darkblue date-item min-rmargin">دانشگاه تهران  </span>
+                        <img class="left" src="/static/images/uni-logo.png">
+                    </div>
+                </div>
+            </div>
+            <div class="tv-list-item">
+                <div class="relative right tv-item">
+                    <img src="/static/images/tv-img.jpg" width="100px" height="75px">
+
+                    <div class="absolute item-icon"></div>
+                </div>
+                <div class="info-title mjtunisia">
+                    ی و بهمانی در تهران و حواشی آن
+
+                </div>
+                <div class="bbcnassim info-text">
+                    کلیپ حواشی برنامه ی مناظره ی فلانی و بهمانیاشی برنامه ی
+
+                </div>
+                <div class="absolute list-items">
+                    <div class=" box-litem-time left">
+                        <span class="left darkblue date-item min-rmargin">02 آبان 1394</span>
+                        <img class="left" src="/static/images/calu.png">
+                    </div>
+                    <div class=" box-ritem-time left">
+                        <span class="left darkblue date-item min-rmargin">دانشگاه تهران  </span>
+                        <img class="left" src="/static/images/uni-logo.png">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="tv-slider relative">
+        {% for i in "123456" %}
+            <div class="relative tv-item">
+                <img src="/static/images/tv-img.jpg" width="194px" height="107px">
 
+                <div class="absolute item-icon"></div>
+            </div>
+        {% endfor %}
+
+    </div>
+    <div class="tv-left-arrow absolute"></div>
+    <div class="tv-right-arrow absolute"></div>
 </div>
